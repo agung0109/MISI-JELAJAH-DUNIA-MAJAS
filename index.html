@@ -1,1507 +1,1367 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="h-full">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MENGENALI MAJAS DALAM PUISI - Petualangan Naskah Medieval</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MENGENALI MAJAS DALAM PUISI: Petualangan Menemukan Keindahan Bahasa</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Cinzel, Cormorant Garamond, & MedievalSharp -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=MedievalSharp&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        parchment: '#fcf7e8',
-                        parchmentDark: '#f4e4bc',
-                        parchmentCard: '#fffdf5',
-                        medievalGold: '#ffd700',
-                        goldDark: '#b8860b',
-                        waxRed: '#722f37',
-                        crimsonDark: '#800000',
-                        inkDark: '#1c130d',
-                        medievalBorder: '#4a3319'
+                        parchment: {
+                            100: '#fcf7e8',
+                            200: '#f5e9c9',
+                            300: '#e8d5b5',
+                            400: '#d9bf96',
+                            800: '#5c4428',
+                            900: '#3a2916',
+                        },
+                        crimson: {
+                            600: '#9b111e',
+                            700: '#800000',
+                            800: '#580000',
+                            900: '#380000',
+                        },
+                        gold: {
+                            300: '#ffe066',
+                            400: '#ffd700',
+                            500: '#d4af37',
+                            600: '#b8860b',
+                            700: '#8b6508',
+                        }
                     },
                     fontFamily: {
-                        cinzel: ['Cinzel', 'serif'],
-                        garamond: ['Cormorant Garamond', 'serif'],
-                        medieval: ['MedievalSharp', 'cursive']
+                        medieval: ['MedievalSharp', 'cursive', 'serif'],
+                        cinzel: ['"Cinzel Decorative"', 'serif'],
+                        cormorant: ['"Cormorant Garamond"', 'serif'],
                     }
                 }
             }
         }
     </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=MedievalSharp&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Custom Medieval Parchment & Gold Styling */
+        /* Global & Parchment Styling */
         body {
-            background-color: #0f0a06;
-            color: #2c1d11;
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background-color: #2a1f18;
+            color: #2c1a0e;
             overflow-x: hidden;
-            touch-action: manipulation;
+            user-select: none;
         }
 
-        /* Parchment Background Texture */
         .parchment-bg {
-            background: #fcf7e8;
+            background: #f4e4bc;
             background-image: 
-                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.05) 100%),
-                linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
-            box-shadow: inset 0 0 100px rgba(74, 51, 25, 0.35), 0 10px 30px rgba(0,0,0,0.85);
-            border: 3px solid #b8860b;
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+            box-shadow: inset 0 0 80px rgba(88, 50, 20, 0.35);
         }
 
-        /* Golden Carved Ornate Border */
-        .medieval-border {
-            border: 4px solid #ffd700;
-            outline: 2px solid #722f37;
-            outline-offset: -8px;
-            position: relative;
+        .gold-border {
+            border: 3px solid #d4af37;
+            border-image: linear-gradient(to bottom right, #ffe066, #b8860b, #ffe066, #8b6508) 1;
         }
 
-        .medieval-border::before, .medieval-border::after {
-            content: '✦';
-            position: absolute;
-            color: #ffd700;
-            font-size: 1.5rem;
-            z-index: 10;
-        }
-        .medieval-border::before { top: 2px; left: 6px; }
-        .medieval-border::after { top: 2px; right: 6px; }
-
-        /* Canvas Particle Overlay */
-        #particleCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 1;
+        .gold-text-glow {
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(184, 134, 11, 0.4);
         }
 
-        /* 3D Flip Card Styles */
-        .flip-card {
+        .medieval-shadow {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* 3D Flip Card */
+        .perspective-1000 {
             perspective: 1000px;
-            height: 200px;
         }
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        .transform-style-3d {
             transform-style: preserve-3d;
-            cursor: pointer;
-        }
-        .flip-card.flipped .flip-card-inner {
-            transform: rotateY(180deg);
+            transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
         }
         .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            border-radius: 0.75rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+            -webkit-backface-visibility: hidden;
         }
         .flip-card-back {
             transform: rotateY(180deg);
         }
-
-        /* Red Wax Seal Decorative Badge */
-        .wax-seal {
-            background: radial-gradient(circle at 30% 30%, #a81c24, #722f37, #420d12);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.3);
-            border: 2px solid #ffd700;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: #fcf7e8;
+        .flipped .transform-style-3d {
+            transform: rotateY(180deg);
         }
 
-        /* Audio Control Equalizer Bar Animation */
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2a1f18;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b8860b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffd700;
+        }
+
+        /* Wax Seal Badge */
+        .wax-seal {
+            background: radial-gradient(circle at 30% 30%, #c41e3a, #800000, #4a0000);
+            box-shadow: 2px 4px 8px rgba(0,0,0,0.6), inset -2px -2px 6px rgba(0,0,0,0.5);
+            border: 2px solid #a00000;
+        }
+
+        /* Equalizer Animation */
         .eq-bar {
             width: 3px;
             background-color: #ffd700;
-            animation: eqAnim 1s ease-in-out infinite alternate;
+            animation: eq 1s ease-in-out infinite alternate;
         }
         .eq-bar:nth-child(1) { height: 12px; animation-delay: 0.1s; }
-        .eq-bar:nth-child(2) { height: 18px; animation-delay: 0.3s; }
+        .eq-bar:nth-child(2) { height: 20px; animation-delay: 0.3s; }
         .eq-bar:nth-child(3) { height: 8px;  animation-delay: 0.2s; }
-        .eq-bar:nth-child(4) { height: 15px; animation-delay: 0.4s; }
-
-        @keyframes eqAnim {
+        .eq-bar:nth-child(4) { height: 16px; animation-delay: 0.4s; }
+        @keyframes eq {
             0% { transform: scaleY(0.3); }
             100% { transform: scaleY(1.1); }
         }
-
-        .paused .eq-bar {
+        .eq-paused .eq-bar {
             animation-play-state: paused;
             height: 4px !important;
         }
-
-        /* Custom Scrollbar for inner boxes */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f4e4bc;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #722f37;
-            border-radius: 4px;
-        }
-
-        /* Slide Animation */
-        .slide-content {
-            animation: fadeInSlide 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes fadeInSlide {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
     </style>
 </head>
-<body class="flex flex-col min-h-screen justify-between relative select-none">
+<body class="h-full flex flex-col justify-between relative bg-stone-950 text-stone-900 overflow-x-hidden">
 
-    <!-- Canvas for Floating Gold Embers/Particles -->
-    <canvas id="particleCanvas"></canvas>
+    <!-- Canvas Debu Emas 60FPS -->
+    <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
 
-    <!-- Hidden YouTube Audio Player Container -->
-    <div id="youtube-player-container" class="hidden">
-        <div id="ytplayer"></div>
+    <!-- Background YouTube Iframe (Hidden Player API) -->
+    <div id="youtube-player-container" class="hidden pointer-events-none absolute">
+        <div id="youtube-player"></div>
     </div>
 
-    <!-- HEADER / NAVIGATION BAR -->
-    <header class="relative z-20 bg-gradient-to-r from-inkDark via-[#2b0f14] to-inkDark text-parchment px-3 sm:px-4 py-2.5 border-b-2 border-medievalGold shadow-2xl flex justify-between items-center gap-2">
-        <!-- Brand & Title -->
-        <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-            <div class="wax-seal w-8 h-8 sm:w-10 sm:h-10 font-medieval font-bold text-lg sm:text-xl shrink-0">𝕸</div>
+    <!-- Header / Top Medieval Banner -->
+    <header class="relative z-10 bg-stone-900 border-b-2 border-gold-600 px-4 py-3 text-gold-400 flex flex-wrap justify-between items-center shadow-lg">
+        <div class="flex items-center space-x-3">
+            <i class="fa-solid fa-scroll text-2xl text-gold-400"></i>
             <div>
-                <h1 class="font-cinzel text-xs sm:text-base md:text-lg font-bold tracking-wider text-medievalGold">MENGENALI MAJAS DALAM PUISI</h1>
-                <p class="text-[10px] sm:text-xs text-amber-200/80 hidden sm:block font-garamond">Naskah Interactive Learning - Bahasa Indonesia Kelas XI SMA</p>
+                <h1 class="font-cinzel text-sm sm:text-base md:text-lg font-bold tracking-wider text-amber-200">
+                    KERAJAAN BAHASA : MAJAS PUISI
+                </h1>
+                <p class="font-medieval text-xs text-amber-400/80 hidden sm:block">SMA Kelas XI - Bahasa Indonesia</p>
             </div>
         </div>
 
-        <!-- Center Slide Selector Dropdown (Desktop) -->
-        <div class="hidden md:flex items-center bg-[#1c130d] border border-medievalGold/60 rounded-lg px-3 py-1">
-            <i class="fa-solid fa-scroll text-medievalGold mr-2 text-xs"></i>
-            <select id="slideDropdown" onchange="jumpToSlide(this.value)" class="bg-transparent text-amber-100 font-cinzel text-xs focus:outline-none cursor-pointer">
-                <!-- Dropdown options populated dynamically by JS -->
-            </select>
-        </div>
-
-        <!-- Right Side Controls: BGM Player Widget & Slide Indicator -->
-        <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-            <!-- BGM Floating Toggle Button & Volume -->
-            <div class="flex items-center bg-[#140b07] border border-medievalGold/70 rounded-full px-2.5 py-1 shadow-inner gap-1.5 sm:gap-2">
-                <button id="bgmToggleBtn" onclick="toggleBGM()" class="flex items-center gap-1.5 hover:text-medievalGold transition-colors focus:outline-none" title="Putar/Hentikan Musik Istana">
-                    <span id="bgmIcon" class="text-medievalGold text-xs sm:text-sm"><i class="fa-solid fa-music"></i></span>
-                    <div id="eqContainer" class="flex items-end gap-[2px] h-3.5 px-0.5 paused">
-                        <div class="eq-bar"></div>
-                        <div class="eq-bar"></div>
-                        <div class="eq-bar"></div>
-                        <div class="eq-bar"></div>
-                    </div>
-                    <span class="text-[11px] font-cinzel text-amber-200 hidden lg:inline">Court Minstrel</span>
-                </button>
-                <div class="h-3.5 w-[1px] bg-medievalGold/40 hidden sm:block"></div>
-                <div class="hidden sm:flex items-center gap-1" title="Pengatur Volume Musik">
-                    <i class="fa-solid fa-volume-high text-[10px] text-amber-200/70"></i>
-                    <input type="range" id="bgmVolume" min="0" max="100" value="45" oninput="changeVolume(this.value)" class="w-12 sm:w-16 accent-medievalGold cursor-pointer h-1 bg-amber-950 rounded-lg">
-                </div>
+        <!-- Pemutar Audio Medieval Widget -->
+        <div class="flex items-center space-x-4 bg-stone-950/80 px-3 py-1.5 rounded-lg border border-gold-600/40">
+            <div id="audio-eq" class="flex items-center space-x-1 h-5 cursor-pointer eq-paused" onclick="toggleBGM()" title="Putar/Hentikan Musik Medieval">
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
             </div>
-
-            <!-- Current Slide Badge -->
-            <div class="bg-waxRed border border-medievalGold text-parchment font-cinzel text-xs font-bold px-2.5 py-1 rounded-md shadow shrink-0">
-                <span id="currentSlideNum">1</span> / <span id="totalSlidesNum">14</span>
-            </div>
+            <button onclick="toggleBGM()" id="bgm-btn" class="text-xs font-medieval text-gold-300 hover:text-gold-400 flex items-center space-x-1">
+                <i id="bgm-icon" class="fa-solid fa-music"></i>
+                <span id="bgm-text">Musik Minstrel</span>
+            </button>
+            <input type="range" id="volume-slider" min="0" max="100" value="40" oninput="changeVolume(this.value)" class="w-16 accent-gold-500 cursor-pointer hidden md:block">
         </div>
     </header>
 
-    <!-- TOP PROGRESS BAR -->
-    <div class="w-full bg-inkDark h-1.5 relative z-20">
-        <div id="progressBar" class="bg-gradient-to-r from-amber-600 via-medievalGold to-yellow-300 h-full w-[7.14%] transition-all duration-300 shadow-[0_0_8px_rgba(255,215,0,0.8)]"></div>
-    </div>
-
-    <!-- MAIN SLIDE CONTAINER FRAME -->
-    <main class="relative z-10 flex-grow flex items-center justify-center p-2 sm:p-4 md:p-6">
-        <div class="w-full max-w-5xl parchment-bg medieval-border rounded-xl p-3 sm:p-6 md:p-8 min-h-[500px] sm:min-h-[560px] flex flex-col justify-between relative overflow-hidden transition-all duration-300">
+    <!-- Container Utama Slide Pembelajaran -->
+    <main class="relative z-10 flex-grow flex items-center justify-center p-2 sm:p-4 md:p-6 my-auto">
+        <div class="w-full max-w-5xl parchment-bg rounded-xl border-4 border-amber-800/80 medieval-shadow p-4 sm:p-6 md:p-8 relative min-h-[580px] flex flex-col justify-between overflow-hidden">
             
-            <!-- Corner Decorative Flourishes -->
-            <div class="absolute top-2 left-2 text-medievalGold/40 text-lg sm:text-xl font-medieval pointer-events-none">⚜</div>
-            <div class="absolute top-2 right-2 text-medievalGold/40 text-lg sm:text-xl font-medieval pointer-events-none">⚜</div>
-            <div class="absolute bottom-2 left-2 text-medievalGold/40 text-lg sm:text-xl font-medieval pointer-events-none">⚜</div>
-            <div class="absolute bottom-2 right-2 text-medievalGold/40 text-lg sm:text-xl font-medieval pointer-events-none">⚜</div>
+            <!-- Hiasan Sudut Medieval -->
+            <div class="absolute top-2 left-2 text-amber-800/40 text-2xl pointer-events-none"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="absolute top-2 right-2 text-amber-800/40 text-2xl pointer-events-none"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="absolute bottom-2 left-2 text-amber-800/40 text-2xl pointer-events-none"><i class="fa-solid fa-crown"></i></div>
+            <div class="absolute bottom-2 right-2 text-amber-800/40 text-2xl pointer-events-none"><i class="fa-solid fa-crown"></i></div>
 
-            <!-- Dynamic Slide Content Inserted Here -->
-            <div id="slideContent" class="slide-content flex-grow flex flex-col justify-center">
-                <!-- Content injected via JS -->
+            <!-- INDIKATOR NOMOR SLIDE -->
+            <div class="flex justify-between items-center border-b border-amber-900/20 pb-2 mb-4">
+                <span class="font-medieval text-amber-900 text-xs sm:text-sm font-bold tracking-widest uppercase">
+                    📜 BABAK <span id="current-slide-num">1</span> DARI 14
+                </span>
+                <span id="slide-category" class="font-cinzel text-xs text-crimson-700 font-bold tracking-wide">
+                    SAMPUL KERETA PENYAIR
+                </span>
+            </div>
+
+            <!-- CONTENT SLIDES CONTAINER -->
+            <div id="slide-content-container" class="flex-grow flex flex-col justify-center py-2">
+                <!-- Content will be rendered dynamically by JavaScript -->
             </div>
 
         </div>
     </main>
 
-    <!-- FOOTER NAVIGATION CONTROLS (RESPONSIVE GRID FIXED FOR MOBILE) -->
-    <footer class="relative z-20 bg-gradient-to-r from-inkDark via-[#2b0f14] to-inkDark text-parchment p-2.5 sm:p-3 border-t-2 border-medievalGold grid grid-cols-[auto_1fr_auto] items-center gap-2">
-        
-        <!-- Left Column: Previous Button -->
-        <button id="prevBtn" onclick="prevSlide()" class="px-3 sm:px-4 py-2 bg-gradient-to-r from-amber-950 to-amber-900 hover:from-amber-900 hover:to-amber-800 text-medievalGold border border-medievalGold rounded-lg font-cinzel text-xs font-bold flex items-center gap-1.5 transition-all shadow-md active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed justify-self-start">
-            <i class="fa-solid fa-chevron-left text-[10px] sm:text-xs"></i>
-            <span class="hidden xs:inline">Sebelumnya</span>
-            <span class="xs:hidden">Sebelum</span>
-        </button>
+    <!-- FOOTER NAVIGASI (FIXED / RESPONSIVE) -->
+    <footer class="relative z-10 bg-stone-900 border-t-2 border-gold-600 p-3 sm:px-6 shadow-2xl">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+            
+            <!-- Slide Selector Dropdown -->
+            <div class="w-full sm:w-auto flex items-center justify-between sm:justify-start space-x-2">
+                <label for="slide-select" class="font-medieval text-xs text-gold-400 whitespace-nowrap">Lompat Babak:</label>
+                <select id="slide-select" onchange="goToSlide(parseInt(this.value))" class="bg-stone-950 border border-gold-600/60 text-amber-200 text-xs rounded px-2 py-1 font-medieval focus:outline-none focus:border-gold-400">
+                    <!-- Dropdown options populated dynamically -->
+                </select>
+            </div>
 
-        <!-- Middle Column: Mobile Dropdown & Keyboard Instruction -->
-        <div class="flex flex-col items-center justify-center min-w-0 px-1">
-            <select id="slideDropdownMobile" onchange="jumpToSlide(this.value)" class="md:hidden w-full max-w-[200px] bg-[#1c130d] text-amber-200 border border-medievalGold/60 rounded px-2 py-1 font-cinzel text-xs focus:outline-none truncate text-center">
-                <!-- Mobile options -->
-            </select>
-            <span class="hidden md:block text-[11px] text-amber-200/70 font-garamond italic text-center truncate">
-                Gunakan panah keyboard ◄ ► atau geser layar untuk navigasi
-            </span>
+            <!-- Buttons Navigasi Sebelumnya & Selanjutnya -->
+            <div class="grid grid-cols-2 gap-3 w-full sm:w-auto">
+                <button id="prev-btn" onclick="prevSlide()" class="px-4 py-2 bg-stone-800 hover:bg-amber-900 text-amber-200 border border-gold-600/60 rounded-lg font-medieval text-xs sm:text-sm transition flex items-center justify-center space-x-2 disabled:opacity-40 disabled:cursor-not-allowed">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    <span>Sebelumnya</span>
+                </button>
+                <button id="next-btn" onclick="nextSlide()" class="px-5 py-2 bg-crimson-700 hover:bg-crimson-600 text-amber-100 border border-gold-400 rounded-lg font-medieval text-xs sm:text-sm shadow-md hover:shadow-gold-500/20 transition flex items-center justify-center space-x-2">
+                    <span>Selanjutnya</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
         </div>
-
-        <!-- Right Column: Next Button -->
-        <button id="nextBtn" onclick="nextSlide()" class="px-3 sm:px-5 py-2 bg-gradient-to-r from-amber-600 via-medievalGold to-amber-500 hover:brightness-110 text-inkDark font-cinzel text-xs font-extrabold rounded-lg border border-yellow-200 flex items-center gap-1.5 transition-all shadow-lg active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed justify-self-end">
-            <span class="hidden xs:inline">Selanjutnya</span>
-            <span class="xs:hidden">Lanjut</span>
-            <i class="fa-solid fa-chevron-right text-[10px] sm:text-xs"></i>
-        </button>
-
     </footer>
 
-    <!-- JAVASCRIPT APP CODE -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // ==========================================
-        // 1. DATA SLIDE MATERI & KUIS (14 SLIDES)
-        // ==========================================
-        const slidesData = [
-            // SLIDE 1: Judul Utama & Dewan Ksatria Penyair
-            {
-                title: "Judul Utama & Dewan Penyair",
-                content: `
-                    <div class="text-center space-y-2.5 sm:space-y-4">
-                        <div class="inline-block wax-seal w-12 h-12 sm:w-16 sm:h-16 text-xl sm:text-3xl font-medieval mb-0.5">𝕸</div>
-                        
-                        <div class="space-y-1">
-                            <span class="inline-block bg-waxRed text-parchment px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-cinzel font-bold border border-medievalGold tracking-wider shadow">
-                                MATA PELAJARAN: BAHASA INDONESIA | KELAS: XI SMA
-                            </span>
-                            <h2 class="font-cinzel text-xl sm:text-3xl md:text-4xl font-black text-amber-950 tracking-wide uppercase border-b-2 border-medievalGold inline-block pb-1 pt-1">
-                                MENGENALI MAJAS DALAM PUISI
-                            </h2>
-                            <p class="font-garamond italic text-base sm:text-xl text-amber-900 max-w-2xl mx-auto font-semibold">
-                                "Petualangan Menemukan Keindahan Bahasa dalam Puisi"
-                            </p>
-                        </div>
+        /* ==========================================================================
+           1. GOOGLE APPS SCRIPT CONFIGURATION
+           ========================================================================== */
+        const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxpd5SmsT7OkQwLPrTaSrFxNnrjteYULC_1uu2Lky5QWSd2aiM1e_dXoAniLAH24XSkKA/exec";
 
-                        <!-- BANNER DEWAN KSATRIA PENYAIR -->
-                        <div class="mt-3 bg-gradient-to-b from-[#2b0f14] to-[#1a080a] text-parchment p-3 sm:p-5 rounded-xl border-2 border-medievalGold shadow-2xl max-w-2xl mx-auto">
-                            <div class="flex items-center justify-center gap-2 mb-2">
-                                <span class="text-medievalGold text-base sm:text-lg">🛡️</span>
-                                <h3 class="font-cinzel text-sm sm:text-lg font-bold text-medievalGold tracking-widest uppercase">
-                                    DEWAN KSATRIA PENYAIR
-                                </h3>
-                                <span class="text-medievalGold text-base sm:text-lg">🛡️</span>
-                            </div>
-                            <p class="text-[11px] sm:text-xs text-amber-200/80 font-garamond italic mb-2.5">Penyusun Naskah Pembelajaran Interaktif</p>
-                            
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left font-garamond">
-                                <div class="bg-[#210c10] p-2 rounded border border-amber-900/60 flex items-center gap-2.5 hover:border-medievalGold transition-colors">
-                                    <div class="w-7 h-7 rounded-full bg-medievalGold text-inkDark font-bold flex items-center justify-center text-xs font-cinzel shrink-0">1</div>
-                                    <div class="min-w-0">
-                                        <p class="font-bold text-amber-100 text-xs sm:text-sm truncate">Agung Pangestu</p>
-                                        <p class="text-[11px] text-medievalGold">NPM: 2510631080114</p>
-                                    </div>
-                                </div>
-                                <div class="bg-[#210c10] p-2 rounded border border-amber-900/60 flex items-center gap-2.5 hover:border-medievalGold transition-colors">
-                                    <div class="w-7 h-7 rounded-full bg-medievalGold text-inkDark font-bold flex items-center justify-center text-xs font-cinzel shrink-0">2</div>
-                                    <div class="min-w-0">
-                                        <p class="font-bold text-amber-100 text-xs sm:text-sm truncate">Ariska Nurhidayah</p>
-                                        <p class="text-[11px] text-medievalGold">NPM: 2510631080019</p>
-                                    </div>
-                                </div>
-                                <div class="bg-[#210c10] p-2 rounded border border-amber-900/60 flex items-center gap-2.5 hover:border-medievalGold transition-colors">
-                                    <div class="w-7 h-7 rounded-full bg-medievalGold text-inkDark font-bold flex items-center justify-center text-xs font-cinzel shrink-0">3</div>
-                                    <div class="min-w-0">
-                                        <p class="font-bold text-amber-100 text-xs sm:text-sm truncate">Siti Robiah Adawiyah</p>
-                                        <p class="text-[11px] text-medievalGold">NPM: 2510631080148</p>
-                                    </div>
-                                </div>
-                                <div class="bg-[#210c10] p-2 rounded border border-amber-900/60 flex items-center gap-2.5 hover:border-medievalGold transition-colors">
-                                    <div class="w-7 h-7 rounded-full bg-medievalGold text-inkDark font-bold flex items-center justify-center text-xs font-cinzel shrink-0">4</div>
-                                    <div class="min-w-0">
-                                        <p class="font-bold text-amber-100 text-xs sm:text-sm truncate">Siti Masadah</p>
-                                        <p class="text-[11px] text-medievalGold">NPM: 2510631080146</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        /* ==========================================================================
+           2. AUDIO SYNTHESIZER (WEB AUDIO API FOR SFX)
+           ========================================================================== */
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
 
-                        <div class="mt-1 text-[11px] sm:text-xs font-cinzel text-amber-900 font-semibold tracking-wider animate-pulse">
-                            [ Klik "Selanjutnya" atau Geser Layar untuk Membuka Naskah ]
-                        </div>
-                    </div>
-                `
-            },
-
-            // SLIDE 2: 5 Tujuan Pembelajaran
-            {
-                title: "5 Tujuan Pembelajaran",
-                content: `
-                    <div class="space-y-3 font-garamond">
-                        <div class="text-center mb-1">
-                            <h2 class="font-cinzel text-xl sm:text-3xl font-bold text-amber-950 border-b border-medievalGold inline-block pb-0.5">
-                                📜 TUJUAN PEMBELAJARAN
-                            </h2>
-                            <p class="text-xs font-garamond italic text-amber-900 mt-0.5">Capaian Pembelajaran Bahasa Indonesia Kelas XI</p>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 font-garamond">
-                            <div class="bg-parchmentCard p-3 rounded-lg border border-amber-900/30 shadow-md flex items-start gap-2.5 hover:border-medievalGold transition-all">
-                                <span class="bg-waxRed text-parchment rounded-full w-6 h-6 flex items-center justify-center font-bold text-xs shrink-0 font-cinzel shadow">1</span>
-                                <div>
-                                    <h4 class="font-bold text-amber-950 font-cinzel text-xs sm:text-sm">Memahami Konsep Majas</h4>
-                                    <p class="text-[11px] sm:text-xs text-amber-900">Menjelaskan hakikat dan fungsi gaya bahasa (majas) sebagai instrumen estetika utama dalam puisi.</p>
-                                </div>
-                            </div>
-                            <div class="bg-parchmentCard p-3 rounded-lg border border-amber-900/30 shadow-md flex items-start gap-2.5 hover:border-medievalGold transition-all">
-                                <span class="bg-waxRed text-parchment rounded-full w-6 h-6 flex items-center justify-center font-bold text-xs shrink-0 font-cinzel shadow">2</span>
-                                <div>
-                                    <h4 class="font-bold text-amber-950 font-cinzel text-xs sm:text-sm">Mengidentifikasi 4 Majas Utama</h4>
-                                    <p class="text-[11px] sm:text-xs text-amber-900">Membedakan karakteristik majas Metafora, Personifikasi, Hiperbola, dan Simile secara cermat.</p>
-                                </div>
-                            </div>
-                            <div class="bg-parchmentCard p-3 rounded-lg border border-amber-900/30 shadow-md flex items-start gap-2.5 hover:border-medievalGold transition-all">
-                                <span class="bg-waxRed text-parchment rounded-full w-6 h-6 flex items-center justify-center font-bold text-xs shrink-0 font-cinzel shadow">3</span>
-                                <div>
-                                    <h4 class="font-bold text-amber-950 font-cinzel text-xs sm:text-sm">Menganalisis Bait Puisi</h4>
-                                    <p class="text-[11px] sm:text-xs text-amber-900">Mampu mendeteksi dan mengupas makna gaya bahasa baris demi baris pada teks puisi pilihan.</p>
-                                </div>
-                            </div>
-                            <div class="bg-parchmentCard p-3 rounded-lg border border-amber-900/30 shadow-md flex items-start gap-2.5 hover:border-medievalGold transition-all">
-                                <span class="bg-waxRed text-parchment rounded-full w-6 h-6 flex items-center justify-center font-bold text-xs shrink-0 font-cinzel shadow">4</span>
-                                <div>
-                                    <h4 class="font-bold text-amber-950 font-cinzel text-xs sm:text-sm">Membedakan Metafora vs Simile</h4>
-                                    <p class="text-[11px] sm:text-xs text-amber-900">Memahami perbedaan mendasar perbandingan langsung (metafora) dan pembandingan eksplisit (simile).</p>
-                                </div>
-                            </div>
-                            <div class="bg-parchmentCard p-3 rounded-lg border border-amber-900/30 shadow-md flex items-start gap-2.5 md:col-span-2 hover:border-medievalGold transition-all">
-                                <span class="bg-waxRed text-parchment rounded-full w-6 h-6 flex items-center justify-center font-bold text-xs shrink-0 font-cinzel shadow">5</span>
-                                <div>
-                                    <h4 class="font-bold text-amber-950 font-cinzel text-xs sm:text-sm">Menguji Penguasaan Melalui Kuis</h4>
-                                    <p class="text-[11px] sm:text-xs text-amber-900">Menyelesaikan 10 tantangan kuis interaktif untuk mengukur pemahaman dan meraih gelar pujangga.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-
-            // SLIDE 3: Pengertian Majas & Contoh
-            {
-                title: "Pengertian Majas",
-                content: `
-                    <div class="space-y-4 font-garamond">
-                        <div class="text-center">
-                            <h2 class="font-cinzel text-xl sm:text-3xl font-bold text-amber-950 border-b border-medievalGold inline-block pb-1">
-                                ✒️ APA ITU MAJAS?
-                            </h2>
-                        </div>
-                        
-                        <div class="bg-parchmentCard p-4 sm:p-5 rounded-xl border-2 border-medievalGold shadow-lg">
-                            <p class="text-sm sm:text-lg text-amber-950 leading-relaxed first-letter:text-3xl sm:first-letter:text-4xl first-letter:font-cinzel first-letter:font-bold first-letter:text-waxRed first-letter:float-left first-letter:mr-2">
-                                <strong class="font-cinzel text-amber-950">Majas (Gaya Bahasa)</strong> adalah pemanfaatan kekayaan bahasa, pemakaian ragam tertentu untuk memperoleh efek-efek tertentu yang membuat karya sastra puisi menjadi lebih hidup, estetik, imajinatif, dan berdaya ungkap tinggi.
-                            </p>
-                        </div>
-
-                        <!-- CONTOH UTAMA -->
-                        <div class="bg-gradient-to-r from-[#2b0f14] via-[#1a080a] to-[#2b0f14] text-parchment p-4 sm:p-5 rounded-xl border border-medievalGold text-center space-y-2 shadow-xl">
-                            <span class="text-[10px] sm:text-xs font-cinzel text-medievalGold tracking-widest uppercase">Contoh Ungkapan Majas</span>
-                            <blockquote class="font-cinzel text-base sm:text-2xl text-amber-200 italic">
-                                "Angin malam mengetuk jendela kamarku."
-                            </blockquote>
-                            <p class="text-xs sm:text-sm text-amber-100/90 font-garamond italic pt-1">
-                                💡 <strong>Penjelasan:</strong> Angin (benda mati) diberi sifat manusiawi yaitu "mengetuk". Ini menciptakan gambaran suasana malam yang hidup dan terasa dekat bagi pembaca.
-                            </p>
-                        </div>
-                    </div>
-                `
-            },
-
-            // SLIDE 4: 4 Jenis Majas Utama (Interactive Flip Cards)
-            {
-                title: "4 Jenis Majas Utama",
-                content: `
-                    <div class="space-y-3">
-                        <div class="text-center">
-                            <h2 class="font-cinzel text-xl sm:text-3xl font-bold text-amber-950 border-b border-medievalGold inline-block pb-1">
-                                🛡️ 4 JENIS MAJAS UTAMA
-                            </h2>
-                            <p class="text-xs text-amber-900 font-garamond italic mt-0.5">Sentuh/Klik kartu di bawah ini untuk membalik dan melihat deskripsinya!</p>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <!-- METAFORA -->
-                            <div class="flip-card" onclick="flipCard(this)">
-                                <div class="flip-card-inner">
-                                    <div class="flip-card-front bg-gradient-to-br from-[#2b0f14] to-[#1c130d] text-parchment border-2 border-medievalGold">
-                                        <span class="text-xl mb-1">👑</span>
-                                        <h3 class="font-cinzel text-base font-bold text-medievalGold">METAFORA</h3>
-                                        <p class="text-xs text-amber-200/80 mt-1">Perbandingan Langsung</p>
-                                        <span class="text-[10px] text-amber-300/60 mt-2 italic">[ Klik untuk Membalik ]</span>
-                                    </div>
-                                    <div class="flip-card-back bg-parchmentCard text-amber-950 border-2 border-medievalGold">
-                                        <h4 class="font-cinzel text-xs sm:text-sm font-bold text-waxRed mb-1">METAFORA</h4>
-                                        <p class="text-xs font-garamond leading-tight">Ungkapan perbandingan dua hal secara langsung tanpa kata pembanding karena memiliki kemiripan sifat mendasar.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- PERSONIFIKASI -->
-                            <div class="flip-card" onclick="flipCard(this)">
-                                <div class="flip-card-inner">
-                                    <div class="flip-card-front bg-gradient-to-br from-[#2b0f14] to-[#1c130d] text-parchment border-2 border-medievalGold">
-                                        <span class="text-xl mb-1">🍃</span>
-                                        <h3 class="font-cinzel text-base font-bold text-medievalGold">PERSONIFIKASI</h3>
-                                        <p class="text-xs text-amber-200/80 mt-1">Insanisasi Benda Mati</p>
-                                        <span class="text-[10px] text-amber-300/60 mt-2 italic">[ Klik untuk Membalik ]</span>
-                                    </div>
-                                    <div class="flip-card-back bg-parchmentCard text-amber-950 border-2 border-medievalGold">
-                                        <h4 class="font-cinzel text-xs sm:text-sm font-bold text-waxRed mb-1">PERSONIFIKASI</h4>
-                                        <p class="text-xs font-garamond leading-tight">Penggambaran benda mati atau objek tak bernyawa seolah-olah memiliki sifat dan perilaku layaknya manusia.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- HIPERBOLA -->
-                            <div class="flip-card" onclick="flipCard(this)">
-                                <div class="flip-card-inner">
-                                    <div class="flip-card-front bg-gradient-to-br from-[#2b0f14] to-[#1c130d] text-parchment border-2 border-medievalGold">
-                                        <span class="text-xl mb-1">⚡</span>
-                                        <h3 class="font-cinzel text-base font-bold text-medievalGold">HIPERBOLA</h3>
-                                        <p class="text-xs text-amber-200/80 mt-1">Pengungkapan Berlebihan</p>
-                                        <span class="text-[10px] text-amber-300/60 mt-2 italic">[ Klik untuk Membalik ]</span>
-                                    </div>
-                                    <div class="flip-card-back bg-parchmentCard text-amber-950 border-2 border-medievalGold">
-                                        <h4 class="font-cinzel text-xs sm:text-sm font-bold text-waxRed mb-1">HIPERBOLA</h4>
-                                        <p class="text-xs font-garamond leading-tight">Gaya bahasa yang mengandung pernyataan berlebihan dari kenyataan sebenarnya untuk menekankan kesan dramatis.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- SIMILE -->
-                            <div class="flip-card" onclick="flipCard(this)">
-                                <div class="flip-card-inner">
-                                    <div class="flip-card-front bg-gradient-to-br from-[#2b0f14] to-[#1c130d] text-parchment border-2 border-medievalGold">
-                                        <span class="text-xl mb-1">🪞</span>
-                                        <h3 class="font-cinzel text-base font-bold text-medievalGold">SIMILE</h3>
-                                        <p class="text-xs text-amber-200/80 mt-1">Pembandingan Eksplisit</p>
-                                        <span class="text-[10px] text-amber-300/60 mt-2 italic">[ Klik untuk Membalik ]</span>
-                                    </div>
-                                    <div class="flip-card-back bg-parchmentCard text-amber-950 border-2 border-medievalGold">
-                                        <h4 class="font-cinzel text-xs sm:text-sm font-bold text-waxRed mb-1">SIMILE</h4>
-                                        <p class="text-xs font-garamond leading-tight">Perbandingan dua hal yang secara hakiki berbeda namun dianggap sama, menggunakan kata tugas pembanding eksplisit.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-
-            // SLIDE 5: Majas Metafora
-            {
-                title: "Majas Metafora",
-                content: `
-                    <div class="space-y-4 font-garamond">
-                        <div class="text-center">
-                            <span class="text-xs font-cinzel text-waxRed tracking-widest font-bold">PEMBAHASAN #1</span>
-                            <h2 class="font-cinzel text-xl sm:text-3xl font-bold text-amber-950 border-b border-medievalGold inline-block pb-1">
-                                👑 MAJAS METAFORA
-                            </h2>
-                        </div>
-
-                        <div class="bg-parchmentCard p-4 rounded-xl border border-amber-900/40 shadow-md">
-                            <h4 class="font-cinzel text-sm sm:text-base font-bold text-amber-950 mb-1">Pengertian Detail:</h4>
-                            <p class="text-xs sm:text-sm text-amber-900 leading-relaxed">
-                                Metafora menyandingkan dua objek secara langsung tanpa penghubung. Objek pertama disamakan secara utuh dengan objek kedua berdasarkan kemiripan sifat, kedudukan, atau perannya.
-                            </p>
-                        </div>
-
-                        <!-- CONTOH BOX -->
-                        <div class="bg-gradient-to-br from-[#2b0f14] to-[#1c130d] text-parchment p-4 rounded-xl border border-medievalGold shadow-xl space-y-2">
-                            <div class="flex items-center gap-2">
-                                <span class="wax-seal w-6 h-6 text-xs">M</span>
-                                <h4 class="font-cinzel text-xs sm:text-sm text-medievalGold font-bold">Contoh Ungkapan Puisi:</h4>
-                            </div>
-                            <blockquote class="font-cinzel text-base sm:text-xl text-amber-200 italic pl-3 border-l-2 border-medievalGold">
-                                "Kakak adalah <span class="text-yellow-300 font-bold underline decoration-medievalGold">tulang punggung</span> keluarga."
-                            </blockquote>
-                            <div class="text-xs sm:text-sm text-amber-100/90 pt-2 border-t border-amber-900/60">
-                                📌 <strong>Analisis Makna:</strong> Frasa <em>"tulang punggung"</em> di sini tidak bermakna organ tubuh fisik, melainkan kiasan langsung untuk <span class="text-medievalGold font-bold">"penopang utama / pencari nafkah keluarga"</span>.
-                            </div>
-                        </div>
-
-                        <div class="bg-amber-100/70 p-3 rounded-lg border border-amber-400 text-xs text-amber-950">
-                            ✨ <strong>Ciri Utama:</strong> Perbandingan analogis langsung, lebih padat, dan tidak pernah menggunakan kata sambung 'seperti' atau 'bagai'.
-                        </div>
-                    </div>
-                `
-            },
-
-            // SLIDE 6: Majas Personifikasi
-            {
-                title: "Majas Personifikasi",
-                content: `
-                    <div class="space-y-4 font-garamond">
-                        <div class="text-center">
-                            <span class="text-xs font-cinzel text-waxRed tracking-widest font-bold">PEMBAHASAN #2</span>
-                            <h2 class="font-cinzel text-xl sm:text-3xl font-bold text-amber-950 border-b border-medievalGold inline-block pb-1">
-                                🍃 MAJAS PERSONIFIKASI
-                            </h2>
-                        </div>
-
-                        <div class="bg-parchmentCard p-4 rounded-xl border border-amber-900/40 shadow-md">
-                            <h4 class="font-cinzel text-sm sm:text-base font-bold text-amber-950 mb-1">Pengertian Detail:</h4>
-                            <p class="text-xs sm:text-sm text-amber-900 leading-relaxed">
-                                Personifikasi memberikan karakteristik, perilaku, emosi, atau panca indera manusia kepada benda mati, fenomena alam, atau objek abstrak agar naskah puisi terasa bernyawa.
-                            </p>
-                        </div>
-
-                        <!-- CONTOH BOX -->
-                        <div class="bg-gradient-to-br from-[#2b0f14] to-[#1c130d] text-parchment p-4 rounded-xl border border-medievalGold shadow-xl space-y-2">
-                            <div class="flex items-center gap-2">
-                                <span class="wax-seal w-6 h-6 text-xs">P</span>
-                                <h4 class="font-cinzel text-xs sm:text-sm text-medievalGold font-bold">Contoh Ungkapan Puisi:</h4>
-                            </div>
-                            <blockquote class="font-cinzel text-base sm:text-xl text-amber-200 italic pl-3 border-l-2 border-medievalGold">
-                                "Angin malam <span class="text-yellow-300 font-bold underline decoration-medievalGold">mengetuk</span> jendela."
-                            </blockquote>
-                            <div class="text-xs sm:text-sm text-amber-100/90 pt-2 border-t border-amber-900/60">
-                                📌 <strong>Analisis Makna:</strong> Angin adalah elemen alam tak bernyawa. Aksi <em>"mengetuk"</em> adalah perilaku manusia. Majas ini membuat hembusan angin malam terasa seperti tamu yang hadir secara nyata.
-                            </div>
-                        </div>
-
-                        <div class="bg-amber-100/70 p-3 rounded-lg border border-amber-400 text-xs text-amber-950">
-                            ✨ <strong>Ciri Utama:</strong> Menggunakan kata kerja aktif manusia (menari, berbisik, menyapa, berkejaran) pada objek non-manusia.
-                        </div>
-                    </div>
-                `
-            },
-
-            // SLIDE 7: Majas Hiperbola
-            {
-                title: "Majas Hiperbola",
-                content: `
-                    <div class="space-y-4 font-garamond">
-                        <div class="text-center">
-                            <span class="text-xs font-cinzel text-waxRed tracking-widest font-bold">PEMBAHASAN #3</span>
-                            <h2 class="font-cinzel text-xl sm:text-3xl font-bold text-amber-950 border-b border-medievalGold inline-block pb-1">
-                                ⚡ MAJAS HIPERBOLA
-                            </h2>
-                        </div>
-
-                        <div class="bg-parchmentCard p-4 rounded-xl border border-amber-900/40 shadow-md">
-                            <h4 class="font-cinzel text-sm sm:text-base font-bold text-amber-950 mb-1">Pengertian Detail:</h4>
-                            <p class="text-xs sm:text-sm text-amber-900 leading-relaxed">
-                                Hiperbola membesarkan atau melebih-lebihkan suatu kenyataan secara ekstrem melebihi batas wajar untuk memberikan daya tekan rasa dan ekspresi dramatis yang intens.
-                            </p>
-                        </div>
-
-                        <!-- CONTOH BOX -->
-                        <div class="bg-gradient-to-br from-[#2b0f14] to-[#1c130d] text-parchment p-4 rounded-xl border border-medievalGold shadow-xl space-y-2">
-                            <div class="flex items-center gap-2">
-                                <span class="wax-seal w-6 h-6 text-xs">H</span>
-                                <h4 class="font-cinzel text-xs sm:text-sm text-medievalGold font-bold">Contoh Ungkapan Puisi:</h4>
-                            </div>
-                            <blockquote class="font-cinzel text-base sm:text-xl text-amber-200 italic pl-3 border-l-2 border-medievalGold">
-                                "Aku sudah menunggumu selama <span class="text-yellow-300 font-bold underline decoration-medievalGold">seribu tahun</span>."
-                            </blockquote>
-                            <div class="text-xs sm:text-sm text-amber-100/90 pt-2 border-t border-amber-900/60">
-                                📌 <strong>Analisis Makna:</strong> Manusia tidak hidup hingga 1000 tahun. Ungkapan <em>"seribu tahun"</em> dipakai secara eksplosif untuk menegaskan betapa sangat lamanya rasa penantian yang dirasakan penyair.
-                            </div>
-                        </div>
-
-                        <div class="bg-amber-100/70 p-3 rounded-lg border border-amber-400 text-xs text-amber-950">
-                            ✨ <strong>Ciri Utama:</strong> Menggunakan kata-kata yang dramatis dan terkesan mustahil secara kenyataan fisik demi menggugah emosi pembaca.
-                        </div>
-                    </div>
-                `
-            },
-
-            // SLIDE 8: Majas Simile & Kata Pembanding
-            {
-                title: "Majas Simile",
-                content: `
-                    <div class="space-y-4 font-garamond">
-                        <div class="text-center">
-                            <span class="text-xs font-cinzel text-waxRed tracking-widest font-bold">PEMBAHASAN #4</span>
-                            <h2 class="font-cinzel text-xl sm:text-3xl font-bold text-amber-950 border-b border-medievalGold inline-block pb-1">
-                                🪞 MAJAS SIMILE
-                            </h2>
-                        </div>
-
-                        <div class="bg-parchmentCard p-4 rounded-xl border border-amber-900/40 shadow-md">
-                            <h4 class="font-cinzel text-sm sm:text-base font-bold text-amber-950 mb-1">Pengertian & Kata Pembanding Eksplisit:</h4>
-                            <p class="text-xs sm:text-sm text-amber-900 leading-relaxed mb-2">
-                                Simile membandingkan dua hal berlainan secara eksplisit menggunakan **kata tugas pembanding**:
-                            </p>
-                            <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2 font-cinzel font-bold text-xs text-parchment">
-                                <span class="bg-waxRed px-2 py-0.5 rounded border border-medievalGold">seperti</span>
-                                <span class="bg-waxRed px-2 py-0.5 rounded border border-medievalGold">bagai</span>
-                                <span class="bg-waxRed px-2 py-0.5 rounded border border-medievalGold">bagaikan</span>
-                                <span class="bg-waxRed px-2 py-0.5 rounded border border-medievalGold">laksana</span>
-                                <span class="bg-waxRed px-2 py-0.5 rounded border border-medievalGold">ibarat</span>
-                            </div>
-                        </div>
-
-                        <!-- CONTOH BOX -->
-                        <div class="bg-gradient-to-br from-[#2b0f14] to-[#1c130d] text-parchment p-4 rounded-xl border border-medievalGold shadow-xl space-y-2">
-                            <div class="flex items-center gap-2">
-                                <span class="wax-seal w-6 h-6 text-xs">S</span>
-                                <h4 class="font-cinzel text-xs sm:text-sm text-medievalGold font-bold">Contoh Ungkapan Puisi:</h4>
-                            </div>
-                            <blockquote class="font-cinzel text-base sm:text-xl text-amber-200 italic pl-3 border-l-2 border-medievalGold">
-                                "Senyummu <span class="text-yellow-300 font-bold underline decoration-medievalGold">bagai</span> cahaya pagi."
-                            </blockquote>
-                            <div class="text-xs sm:text-sm text-amber-100/90 pt-2 border-t border-amber-900/60">
-                                📌 <strong>Analisis Makna:</strong> Keindahan dan kehangatan senyuman seseorang dibandingkan secara terang-terangan dengan kecerahan <em>"cahaya pagi"</em> menggunakan kata tugas <em>"bagai"</em>.
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-
-            // SLIDE 9: Perbedaan Metafora & Simile (Interactive Comparison Table)
-            {
-                title: "Perbedaan Metafora & Simile",
-                content: `
-                    <div class="space-y-3 font-garamond">
-                        <div class="text-center">
-                            <h2 class="font-cinzel text-lg sm:text-2xl font-bold text-amber-950 border-b border-medievalGold inline-block pb-1">
-                                ⚖️ PERBEDAAN METAFORA VS SIMILE
-                            </h2>
-                            <p class="text-xs text-amber-900 italic mt-0.5">Perbandingan Dua Gaya Bahasa Pembandingan</p>
-                        </div>
-
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs sm:text-sm border-collapse border-2 border-amber-900 rounded-lg overflow-hidden bg-parchmentCard shadow-md">
-                                <thead>
-                                    <tr class="bg-gradient-to-r from-[#2b0f14] via-[#1a080a] to-[#2b0f14] text-medievalGold font-cinzel text-center">
-                                        <th class="p-2 sm:p-3 border border-amber-900">Aspek Perbandingan</th>
-                                        <th class="p-2 sm:p-3 border border-amber-900">👑 Majas Metafora</th>
-                                        <th class="p-2 sm:p-3 border border-amber-900">🪞 Majas Simile</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-amber-900/30 text-amber-950">
-                                    <tr>
-                                        <td class="p-2 font-bold font-cinzel bg-amber-100/60">Bentuk Pembandingan</td>
-                                        <td class="p-2">Perbandingan langsung (implisit/analogis).</td>
-                                        <td class="p-2">Pembandingan eksplisit (terang-terangan).</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 font-bold font-cinzel bg-amber-100/60">Kata Tugas Pembanding</td>
-                                        <td class="p-2 text-red-900 font-semibold">❌ Tidak memakai (tanpa seperti/bagai).</td>
-                                        <td class="p-2 text-emerald-900 font-bold">✅ Wajib menggunakan kata pembanding.</td>
-                                    </tr>
-                                    <tr class="bg-amber-50/70">
-                                        <td class="p-2 font-bold font-cinzel bg-amber-100/60">Contoh Kalimat 1</td>
-                                        <td class="p-2 italic font-bold">"Ibu adalah pelita hidupku."</td>
-                                        <td class="p-2 italic font-bold">"Ibu bagai pelita dalam hidupku."</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 font-bold font-cinzel bg-amber-100/60">Contoh Kalimat 2</td>
-                                        <td class="p-2 italic font-bold">"Dia raja minyak desa ini."</td>
-                                        <td class="p-2 italic font-bold">"Dia kaya seperti raja minyak."</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="p-2.5 bg-amber-950 text-amber-100 rounded-lg text-xs font-garamond border border-medievalGold shadow">
-                            💡 <strong>Kunci Utama:</strong> Jika kamu menemukan kata <em>"seperti", "bagai", "laksana", "ibarat"</em> dalam kalimat pembandingan, majas tersebut dipastikan adalah <strong>Simile</strong>!
-                        </div>
-                    </div>
-                `
-            },
-
-            // SLIDE 10: Bedah Puisi Interaktif "RINDU DI UJUNG SENJA"
-            {
-                title: "Analisis Puisi Interaktif",
-                content: `
-                    <div class="space-y-3 font-garamond">
-                        <div class="text-center">
-                            <h2 class="font-cinzel text-lg sm:text-2xl font-bold text-amber-950 border-b border-medievalGold inline-block pb-1">
-                                📖 BEDAH PUISI: "RINDU DI UJUNG SENJA"
-                            </h2>
-                            <p class="text-xs text-amber-900 italic mt-0.5">Sentuh/Klik baris puisi untuk mendeteksi majasnya!</p>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <!-- TEKS PUISI -->
-                            <div class="bg-gradient-to-br from-[#2b0f14] to-[#1c130d] text-parchment p-3.5 rounded-xl border-2 border-medievalGold shadow-xl">
-                                <h4 class="font-cinzel text-center text-amber-300 font-bold border-b border-amber-800 pb-1.5 mb-2 text-xs sm:text-sm">
-                                    "RINDU DI UJUNG SENJA"
-                                </h4>
-                                <div class="space-y-1.5 text-xs sm:text-sm font-cinzel text-amber-100">
-                                    <p onclick="showPoemAnalysis(1)" class="cursor-pointer p-2 rounded hover:bg-amber-900/60 border border-transparent hover:border-medievalGold transition-all">
-                                        Baris 1: <span class="italic text-yellow-200 font-garamond text-base sm:text-lg">"Sang surya pamit melempar senyum,"</span>
-                                    </p>
-                                    <p onclick="showPoemAnalysis(2)" class="cursor-pointer p-2 rounded hover:bg-amber-900/60 border border-transparent hover:border-medievalGold transition-all">
-                                        Baris 2: <span class="italic text-yellow-200 font-garamond text-base sm:text-lg">"Ayah adalah nakhoda dalam badai,"</span>
-                                    </p>
-                                    <p onclick="showPoemAnalysis(3)" class="cursor-pointer p-2 rounded hover:bg-amber-900/60 border border-transparent hover:border-medievalGold transition-all">
-                                        Baris 3: <span class="italic text-yellow-200 font-garamond text-base sm:text-lg">"Air mata ini mengalir sejuta muara,"</span>
-                                    </p>
-                                    <p onclick="showPoemAnalysis(4)" class="cursor-pointer p-2 rounded hover:bg-amber-900/60 border border-transparent hover:border-medievalGold transition-all">
-                                        Baris 4: <span class="italic text-yellow-200 font-garamond text-base sm:text-lg">"Hati ini hampa bagai padang pasir."</span>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- DISPLAY ANALISIS -->
-                            <div id="poemAnalysisDisplay" class="bg-parchmentCard p-3.5 rounded-xl border-2 border-medievalGold flex flex-col justify-center text-center shadow-md">
-                                <div class="wax-seal w-9 h-9 mx-auto text-base mb-1.5 font-medieval">🔍</div>
-                                <h4 class="font-cinzel font-bold text-amber-950 text-sm mb-0.5">Pilih Baris Puisi</h4>
-                                <p class="text-xs text-amber-900 font-garamond">
-                                    Klik salah satu baris di sebelah kiri untuk menampilkan hasil bedah majas dan penjelasannya.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-
-            // SLIDE 11: 5 Langkah Mengidentifikasi Majas
-            {
-                title: "5 Langkah Identifikasi Majas",
-                content: `
-                    <div class="space-y-3 font-garamond">
-                        <div class="text-center">
-                            <h2 class="font-cinzel text-lg sm:text-2xl font-bold text-amber-950 border-b border-medievalGold inline-block pb-0.5">
-                                🗺️ 5 LANGKAH MENGIDENTIFIKASI MAJAS
-                            </h2>
-                            <p class="text-xs text-amber-900 italic mt-0.5">Panduan Praktis Menguraikan Gaya Bahasa dalam Puisi</p>
-                        </div>
-
-                        <div class="space-y-2">
-                            <div class="bg-parchmentCard p-2 sm:p-2.5 rounded-lg border border-amber-900/40 flex items-center gap-2.5 shadow-sm hover:translate-x-1 transition-transform">
-                                <span class="bg-amber-950 text-medievalGold font-cinzel font-bold text-xs px-2.5 py-1 rounded shrink-0">1. BACA</span>
-                                <p class="text-xs text-amber-950 font-bold">Baca seluruh bait puisi secara utuh untuk menangkap gambaran suasana umum.</p>
-                            </div>
-                            <div class="bg-parchmentCard p-2 sm:p-2.5 rounded-lg border border-amber-900/40 flex items-center gap-2.5 shadow-sm hover:translate-x-1 transition-transform">
-                                <span class="bg-amber-950 text-medievalGold font-cinzel font-bold text-xs px-2.5 py-1 rounded shrink-0">2. TANDAI</span>
-                                <p class="text-xs text-amber-950 font-bold">Tandai kata atau frasa kiasan yang tidak bermakna sebenarnya (harfiah).</p>
-                            </div>
-                            <div class="bg-parchmentCard p-2 sm:p-2.5 rounded-lg border border-amber-900/40 flex items-center gap-2.5 shadow-sm hover:translate-x-1 transition-transform">
-                                <span class="bg-amber-950 text-medievalGold font-cinzel font-bold text-xs px-2.5 py-1 rounded shrink-0">3. PERIKSA</span>
-                                <p class="text-xs text-amber-950 font-bold">Cari kata pembanding (seperti, bagai, laksana). Jika ada ➔ <strong>Simile</strong>.</p>
-                            </div>
-                            <div class="bg-parchmentCard p-2 sm:p-2.5 rounded-lg border border-amber-900/40 flex items-center gap-2.5 shadow-sm hover:translate-x-1 transition-transform">
-                                <span class="bg-amber-950 text-medievalGold font-cinzel font-bold text-xs px-2.5 py-1 rounded shrink-0">4. TENTUKAN</span>
-                                <p class="text-xs text-amber-950 font-bold">Cek aksi benda mati (Personifikasi) atau klaim berlebihan (Hiperbola).</p>
-                            </div>
-                            <div class="bg-parchmentCard p-2 sm:p-2.5 rounded-lg border border-amber-900/40 flex items-center gap-2.5 shadow-sm hover:translate-x-1 transition-transform">
-                                <span class="bg-waxRed text-parchment font-cinzel font-bold text-xs px-2.5 py-1 rounded shrink-0">5. JELASKAN</span>
-                                <p class="text-xs text-amber-950 font-bold">Uraikan arti kiasan majas tersebut sesuai maksud perasaan penyair.</p>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-
-            // SLIDE 12: Cek Pemahamanmu (10-question interactive quiz)
-            {
-                title: "Cek Pemahamanmu (Kuis)",
-                content: `
-                    <div id="quizContainer" class="space-y-3 font-garamond">
-                        <!-- Quiz Header -->
-                        <div class="flex justify-between items-center border-b border-medievalGold pb-1.5">
-                            <div>
-                                <h2 class="font-cinzel text-base sm:text-xl font-bold text-amber-950">⚔️ CEK PEMAHAMANMU (KUIS MAJAS)</h2>
-                                <p class="text-[11px] sm:text-xs text-amber-900 italic">Soal <span id="quizQuestionNum">1</span> dari 10</p>
-                            </div>
-                            <div class="bg-amber-950 text-medievalGold font-cinzel text-xs px-2.5 py-1 rounded border border-medievalGold shadow">
-                                Skor: <span id="quizScoreText" class="font-bold text-white">0</span> / 100
-                            </div>
-                        </div>
-
-                        <!-- Question Body -->
-                        <div class="bg-gradient-to-br from-[#2b0f14] to-[#1c130d] text-parchment p-3.5 rounded-xl border border-medievalGold shadow-lg">
-                            <span class="text-[10px] font-cinzel text-medievalGold uppercase tracking-widest">Identifikasi Majas Kalimat Berikut:</span>
-                            <h3 id="quizQuestionText" class="font-cinzel text-sm sm:text-lg text-amber-200 mt-0.5 italic">
-                                "..."
-                            </h3>
-                        </div>
-
-                        <!-- Options Buttons -->
-                        <div id="quizOptions" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <!-- Options rendered dynamically -->
-                        </div>
-
-                        <!-- Feedback Box -->
-                        <div id="quizFeedback" class="hidden p-2.5 rounded-lg text-xs font-garamond border transition-all">
-                            <!-- Feedback text -->
-                        </div>
-                    </div>
-                `
-            },
-
-            // SLIDE 13: Rangkuman
-            {
-                title: "Rangkuman Materi",
-                content: `
-                    <div class="space-y-3 font-garamond">
-                        <div class="text-center">
-                            <h2 class="font-cinzel text-xl sm:text-3xl font-bold text-amber-950 border-b border-medievalGold inline-block pb-1">
-                                📜 RANGKUMAN GULUNGAN NASKAH
-                            </h2>
-                        </div>
-
-                        <div class="bg-parchmentCard p-4 rounded-xl border-2 border-medievalGold shadow-lg space-y-2.5 text-xs sm:text-sm text-amber-950">
-                            <div class="flex items-start gap-2">
-                                <span class="text-waxRed font-bold text-base">✦</span>
-                                <p><strong>Majas (Gaya Bahasa):</strong> Alat estetika penyair untuk mengkonkretkan gagasan dan membangkitkan emosi imajinatif pembaca.</p>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="text-waxRed font-bold text-base">✦</span>
-                                <p><strong>Metafora:</strong> Membandingkan dua hal secara langsung tanpa kata penghubung (contoh: <em>tulang punggung</em>).</p>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="text-waxRed font-bold text-base">✦</span>
-                                <p><strong>Personifikasi:</strong> Memberikan sifat dan kemampuan manusia kepada benda mati (contoh: <em>ombak berkejaran</em>).</p>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="text-waxRed font-bold text-base">✦</span>
-                                <p><strong>Hiperbola:</strong> Pernyataan berlebihan secara dramatis dari realita asli (contoh: <em>menunggu seribu tahun</em>).</p>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="text-waxRed font-bold text-base">✦</span>
-                                <p><strong>Simile:</strong> Perbandingan eksplisit yang ditandai kata pembanding seperti <em>bagai, laksana, seperti</em>.</p>
-                            </div>
-                        </div>
-
-                        <div class="text-center pt-1">
-                            <span class="wax-seal px-4 py-1 rounded-full text-xs font-cinzel">Naskah Telah Berhasil Dipelajari</span>
-                        </div>
-                    </div>
-                `
-            },
-
-            // SLIDE 14: Daftar Pustaka
-            {
-                title: "Daftar Pustaka",
-                content: `
-                    <div class="space-y-4 font-garamond">
-                        <div class="text-center">
-                            <h2 class="font-cinzel text-xl sm:text-3xl font-bold text-amber-950 border-b border-medievalGold inline-block pb-1">
-                                📚 DAFTAR PUSTAKA
-                            </h2>
-                            <p class="text-xs text-amber-900 italic mt-0.5">Sumber Rujukan Akademis Pembelajaran Bahasa Indonesia</p>
-                        </div>
-
-                        <div class="space-y-3 max-w-2xl mx-auto">
-                            <div class="bg-parchmentCard p-3.5 rounded-xl border border-amber-900/40 shadow-md flex items-start gap-3 hover:border-medievalGold transition-colors">
-                                <span class="text-2xl">📖</span>
-                                <div class="text-xs sm:text-sm text-amber-950">
-                                    <p class="font-bold font-cinzel text-amber-950">Keraf, Gorys. (2009).</p>
-                                    <p class="italic text-amber-900">Diksi dan Gaya Bahasa.</p>
-                                    <p class="text-amber-800">Jakarta: PT Gramedia Pustaka Utama.</p>
-                                </div>
-                            </div>
-
-                            <div class="bg-parchmentCard p-3.5 rounded-xl border border-amber-900/40 shadow-md flex items-start gap-3 hover:border-medievalGold transition-colors">
-                                <span class="text-2xl">📖</span>
-                                <div class="text-xs sm:text-sm text-amber-950">
-                                    <p class="font-bold font-cinzel text-amber-950">Tarigan, Henry Guntur. (2013).</p>
-                                    <p class="italic text-amber-900">Pengajaran Gaya Bahasa.</p>
-                                    <p class="text-amber-800">Bandung: Angkasa.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 text-center bg-gradient-to-r from-[#2b0f14] via-[#1a080a] to-[#2b0f14] text-parchment p-3.5 rounded-xl border border-medievalGold">
-                            <p class="font-cinzel text-xs text-medievalGold">Disusun oleh Dewan Ksatria Penyair © 2026</p>
-                            <p class="text-[11px] font-garamond text-amber-200/70 mt-0.5">Media Pembelajaran Bahasa Indonesia Kelas XI SMA</p>
-                        </div>
-                    </div>
-                `
+        function initAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new AudioCtx();
             }
-        ];
-
-        // ==========================================
-        // 2. DATA KUIS (10 SOAL MAJAS)
-        // ==========================================
-        const quizQuestions = [
-            {
-                q: "1. 'Ombak berkejaran menuju pantai.'",
-                options: ["Personifikasi", "Metafora", "Hiperbola", "Simile"],
-                answer: 0,
-                exp: "Ombak (benda mati) diberi aksi manusiawi 'berkejaran'."
-            },
-            {
-                q: "2. 'Kakak adalah tulang punggung keluarga.'",
-                options: ["Simile", "Metafora", "Hiperbola", "Personifikasi"],
-                answer: 1,
-                exp: "Perbandingan langsung tanpa kata hubung ('tulang punggung' = penopang nafkah)."
-            },
-            {
-                q: "3. 'Aku sudah menunggumu seribu tahun.'",
-                options: ["Personifikasi", "Metafora", "Hiperbola", "Simile"],
-                answer: 2,
-                exp: "Pernyataan yang dilebih-lebihkan secara ekstrem dari kenyataan."
-            },
-            {
-                q: "4. 'Wajahnya bersinar seperti bulan.'",
-                options: ["Metafora", "Personifikasi", "Simile", "Hiperbola"],
-                answer: 2,
-                exp: "Perbandingan eksplisit yang menggunakan kata tugas 'seperti'."
-            },
-            {
-                q: "5. 'Pena menari-nari di atas kertas putih.'",
-                options: ["Personifikasi", "Hiperbola", "Metafora", "Simile"],
-                answer: 0,
-                exp: "Pena diberi sifat manusia yaitu 'menari-nari'."
-            },
-            {
-                q: "6. 'Suaranya yang menggelegar membelah angkasa.'",
-                options: ["Simile", "Hiperbola", "Metafora", "Personifikasi"],
-                answer: 1,
-                exp: "Ungkapan berlebihan secara dramatis ('membelah angkasa')."
-            },
-            {
-                q: "7. 'Dewi malam menyinari bumi yang sepi.'",
-                options: ["Metafora", "Simile", "Personifikasi", "Hiperbola"],
-                answer: 0,
-                exp: "'Dewi malam' adalah metafora kiasan langsung untuk bulan."
-            },
-            {
-                q: "8. 'Semangatnya keras bagaikan baja.'",
-                options: ["Personifikasi", "Metafora", "Simile", "Hiperbola"],
-                answer: 2,
-                exp: "Menggunakan kata pembanding eksplisit 'bagaikan'."
-            },
-            {
-                q: "9. 'Rumput bergoyang menyapa sang surya.'",
-                options: ["Personifikasi", "Hiperbola", "Simile", "Metafora"],
-                answer: 0,
-                exp: "Rumput diberi aksi manusiawi 'bergoyang menyapa'."
-            },
-            {
-                q: "10. 'Airmata mengalir membendung sungai kerinduan.'",
-                options: ["Metafora", "Hiperbola", "Simile", "Personifikasi"],
-                answer: 1,
-                exp: "Ungkapan yang sangat berlebihan dari kenyataan tetesan air mata."
-            }
-        ];
-
-        // Global State Variables
-        let currentSlide = 0;
-        let quizCurrentIndex = 0;
-        let quizScore = 0;
-        let quizAnswered = new Array(quizQuestions.length).fill(null);
-
-        // Web Audio API Synthesizer (Zero External SFX File Dependencies)
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-        function playSoundEffect(type) {
-            try {
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                const now = audioCtx.currentTime;
-
-                if (type === 'click') {
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(440, now);
-                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
-                    gain.gain.setValueAtTime(0.15, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
-                    osc.start(now);
-                    osc.stop(now + 0.08);
-                } else if (type === 'flip') {
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(300, now);
-                    osc.frequency.exponentialRampToValueAtTime(600, now + 0.12);
-                    gain.gain.setValueAtTime(0.12, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
-                    osc.start(now);
-                    osc.stop(now + 0.12);
-                } else if (type === 'correct') {
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(523.25, now);
-                    osc.frequency.setValueAtTime(659.25, now + 0.1);
-                    osc.frequency.setValueAtTime(783.99, now + 0.2);
-                    gain.gain.setValueAtTime(0.2, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
-                    osc.start(now);
-                    osc.stop(now + 0.4);
-                } else if (type === 'wrong') {
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(220, now);
-                    osc.frequency.setValueAtTime(180, now + 0.15);
-                    gain.gain.setValueAtTime(0.2, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
-                    osc.start(now);
-                    osc.stop(now + 0.35);
-                }
-            } catch (e) {
-                // Fallback catch
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
             }
         }
 
-        // ==========================================
-        // 3. YOUTUBE IFRAME PLAYER INTEGRATION
-        // ==========================================
-        let ytPlayer = null;
-        let isBgmPlaying = false;
-        let isYtApiReady = false;
+        // SFX: Pena Bulu Ayam (Quill sound)
+        function playQuillSFX() {
+            try {
+                initAudioContext();
+                const bufferSize = audioCtx.sampleRate * 0.12;
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1;
+                }
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = buffer;
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.value = 1200;
+                filter.Q.value = 3;
 
+                const gain = audioCtx.createGain();
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+
+                noise.connect(filter);
+                filter.connect(gain);
+                gain.connect(audioCtx.destination);
+                noise.start();
+            } catch(e) {}
+        }
+
+        // SFX: Tombol Klik / Medieval Bell
+        function playClickSFX() {
+            try {
+                initAudioContext();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
+
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.08);
+            } catch(e) {}
+        }
+
+        // SFX: Card Flip Swoosh
+        function playFlipSFX() {
+            try {
+                initAudioContext();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(200, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.15);
+
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.15);
+            } catch(e) {}
+        }
+
+        // SFX: Jawaban Benar (Chime Harpa Emas)
+        function playCorrectSFX() {
+            try {
+                initAudioContext();
+                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                notes.forEach((freq, index) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.07);
+
+                    gain.gain.setValueAtTime(0.15, audioCtx.currentTime + index * 0.07);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.07 + 0.3);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(audioCtx.currentTime + index * 0.07);
+                    osc.stop(audioCtx.currentTime + index * 0.07 + 0.3);
+                });
+            } catch(e) {}
+        }
+
+        // SFX: Jawaban Salah (Dissonant Gong)
+        function playWrongSFX() {
+            try {
+                initAudioContext();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+                osc.frequency.linearRampToValueAtTime(110, audioCtx.currentTime + 0.3);
+
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            } catch(e) {}
+        }
+
+        /* ==========================================================================
+           3. YOUTUBE BGM PLAYER INTEGRATION
+           ========================================================================== */
+        let player = null;
+        let isBgmPlaying = false;
+
+        // Load YouTube API Script
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         const firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         function onYouTubeIframeAPIReady() {
-            ytPlayer = new YT.Player('ytplayer', {
+            player = new YT.Player('youtube-player', {
                 height: '0',
                 width: '0',
-                videoId: 'rCYyx8b13cA', // Medieval Music – Court Minstrel
+                videoId: 'rCYyx8b13cA', // Medieval Minstrel Music
                 playerVars: {
                     'autoplay': 0,
                     'controls': 0,
                     'loop': 1,
-                    'playlist': 'rCYyx8b13cA',
-                    'playsinline': 1
+                    'playlist': 'rCYyx8b13cA'
                 },
                 events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
+                    'onReady': onPlayerReady
                 }
             });
         }
 
         function onPlayerReady(event) {
-            isYtApiReady = true;
-            ytPlayer.setVolume(45);
-        }
-
-        function onPlayerStateChange(event) {
-            const eq = document.getElementById('eqContainer');
-            const icon = document.getElementById('bgmIcon');
-            if (event.data === YT.PlayerState.PLAYING) {
-                isBgmPlaying = true;
-                eq.classList.remove('paused');
-                icon.innerHTML = `<i class="fa-solid fa-compact-disc fa-spin text-medievalGold"></i>`;
-            } else {
-                isBgmPlaying = false;
-                eq.classList.add('paused');
-                icon.innerHTML = `<i class="fa-solid fa-music text-amber-400"></i>`;
-            }
+            event.target.setVolume(40);
         }
 
         function toggleBGM() {
-            playSoundEffect('click');
-            if (!isYtApiReady || !ytPlayer) return;
+            initAudioContext();
+            const eq = document.getElementById('audio-eq');
+            const icon = document.getElementById('bgm-icon');
+            const text = document.getElementById('bgm-text');
+
+            if (!player || typeof player.playVideo !== 'function') return;
 
             if (isBgmPlaying) {
-                ytPlayer.pauseVideo();
+                player.pauseVideo();
+                isBgmPlaying = false;
+                eq.classList.add('eq-paused');
+                icon.className = "fa-solid fa-music";
+                text.innerText = "Musik Dihentikan";
             } else {
-                ytPlayer.playVideo();
+                player.playVideo();
+                isBgmPlaying = true;
+                eq.classList.remove('eq-paused');
+                icon.className = "fa-solid fa-volume-high text-gold-400";
+                text.innerText = "Minstrel Bermusik";
             }
         }
 
         function changeVolume(val) {
-            if (isYtApiReady && ytPlayer) {
-                ytPlayer.setVolume(val);
+            if (player && typeof player.setVolume === 'function') {
+                player.setVolume(val);
             }
         }
 
-        document.addEventListener('click', function initAudioOnGesture() {
-            if (isYtApiReady && ytPlayer && !isBgmPlaying) {
-                ytPlayer.playVideo();
+        /* ==========================================================================
+           4. GOLD DUST PARTICLE CANVAS (60 FPS)
+           ========================================================================== */
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
             }
-            document.removeEventListener('click', initAudioOnGesture);
-        }, { once: true });
-
-
-        // ==========================================
-        // 4. SLIDE NAVIGATION LOGIC
-        // ==========================================
-        function initApp() {
-            populateDropdowns();
-            renderSlide(currentSlide);
-            initParticleCanvas();
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 20;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedY = Math.random() * 0.8 + 0.2;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.6 + 0.2;
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < -10) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 215, 0, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
 
-        function populateDropdowns() {
-            const dropDesktop = document.getElementById('slideDropdown');
-            const dropMobile = document.getElementById('slideDropdownMobile');
-            
-            let html = '';
-            slidesData.forEach((slide, idx) => {
-                html += `<option value="${idx}">Slide ${idx + 1}: ${slide.title}</option>`;
+        for (let i = 0; i < 45; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
             });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
 
-            dropDesktop.innerHTML = html;
-            dropMobile.innerHTML = html;
-            document.getElementById('totalSlidesNum').textContent = slidesData.length;
+        /* ==========================================================================
+           5. STATE MANAGEMENT & SLIDE DATA (14 SLIDES)
+           ========================================================================== */
+        let currentSlide = 1;
+        const totalSlides = 14;
+
+        // User Data Ksatria
+        let studentInfo = {
+            nama: '',
+            kelas: '',
+            sekolah: ''
+        };
+
+        // Data Kuis 10 Soal SMA Class XI
+        const quizQuestions = [
+            {
+                question: "Perhatikan bait puisi berikut:\n'Dewi malam tersenyum dari balik awan kelabu.'\nMajas apakah yang dominan dalam kutipan tersebut?",
+                options: [
+                    "A. Metafora — membandingkan bulan dengan dewi secara langsung",
+                    "B. Personifikasi — memberi sifat manusia (tersenyum) kepada benda mati (bulan/dewi malam)",
+                    "C. Hiperbola — membesarkan sifat awan",
+                    "D. Simile — menggunakan kata pembanding 'bak'"
+                ],
+                answer: 1,
+                explanation: "Sifat 'tersenyum' adalah perilaku manusia yang dipasangkan pada bulan/dewi malam (benda langit), sehingga tergolong majas Personifikasi."
+            },
+            {
+                question: "Manakah di antara kalimat puisi berikut yang mengandung Majas Metafora?",
+                options: [
+                    "A. Suaranya menggelegar membelah angkasa bumi.",
+                    "B. Pemuda itu adalah tulang punggung keluarga nan tangguh.",
+                    "C. Wajahnya bagaikan rembulan yang bersinar terang.",
+                    "D. Angin berbisik lembut menyampaikan salam kerinduan."
+                ],
+                answer: 1,
+                explanation: "'Tulang punggung' digunakan secara implisit membandingkan peran penopang utama tanpa kata pembanding (seperti/bagaikan), merupakan kiasan murni (Metafora)."
+            },
+            {
+                question: "Kutipan puisi: 'Air matanya mengalir bagai sungai yang tak pernah kering.'\nCiri khas utama majas Simile pada bait di atas adalah...",
+                options: [
+                    "A. Menggunakan kata pembanding eksplisit 'bagai'",
+                    "B. Menggambarkan benda mati yang dapat bergerak",
+                    "C. Menyebutkan objek secara kiasan langsung tanpa pembanding",
+                    "D. Pernyataan yang berlebihan melebihi kenyataan"
+                ],
+                answer: 0,
+                explanation: "Majas Simile ditandai dengan pembanding terbuka/eksplisit menggunakan kata tugas seperti: bagai, seperti, bak, laksana."
+            },
+            {
+                question: "Ungkapan 'Pikirannya melayang setinggi langit ketujuh' mengandung Majas Hiperbola karena...",
+                options: [
+                    "A. Membandingkan dua hal berlainan bentuk",
+                    "B. Melibatkan pancaindra penglihatan saja",
+                    "C. Menggunakan pernyataan yang sangat berlebihan dari kenyataan sebenarnya",
+                    "D. Menyapa objek benda mati seolah bernyawa"
+                ],
+                answer: 2,
+                explanation: "Hiperbola adalah gaya bahasa yang menyatakan sesuatu secara berlebihan untuk memperkuat kesan emosional."
+            },
+            {
+                question: "Bait Puisi: 'Pena menari-nari di atas lembaran kertas putih.'\nKalimat di atas menggunakan majas apa dan apa alasannya?",
+                options: [
+                    "A. Metafora, karena pena disamakan dengan penari balet",
+                    "B. Simile, karena ada perbandingan tersembunyi",
+                    "C. Personifikasi, karena benda mati (pena) diberi tindakan manusia (menari)",
+                    "D. Hiperbola, karena pena bergerak sangat cepat"
+                ],
+                answer: 2,
+                explanation: "Menari adalah tindakan makhluk hidup (manusia). Ketika dilekatkan pada 'pena', ia menjadi Personifikasi."
+            },
+            {
+                question: "Manakah pasangan antara bait puisi dan majas yang PALING TEPAT?",
+                options: [
+                    "A. 'Hatinya sekeras batu karang' -> Personifikasi",
+                    "B. 'Samudra mencium bibir pantai' -> Metafora",
+                    "C. 'Bunga bangsa gugur di medan laga' -> Metafora",
+                    "D. 'Darahnya mengalir secepat kilat' -> Simile"
+                ],
+                answer: 2,
+                explanation: "'Bunga bangsa' adalah pembandingan langsung (Metafora) untuk menyebut para pahlawan yang gugur."
+            },
+            {
+                question: "Fungsi utama penggunaan majas dalam penulisan karya puisi adalah...",
+                options: [
+                    "A. Memperpanjang jumlah bait dan baris puisi",
+                    "B. Meningkatkan efek konotatif, keindahan estetis, dan imajinasi pembaca",
+                    "C. Mengaburkan makna asli agar tidak dapat dipahami pembaca",
+                    "D. Memenuhi syarat tata bahasa baku sesuai ejaan resmi"
+                ],
+                answer: 1,
+                explanation: "Majas hadir untuk memperkaya rasa estetis, menciptakan imajinasi emosional, serta memberikan kedalaman makna konotatif."
+            },
+            {
+                question: "Perhatikan dua kalimat berikut:\n1) 'Senyumnya manis bak madu murni.'\n2) 'Senyum madunya meluluhkan rasa curiga.'\nPerbedaan majas pada kedua kalimat tersebut adalah...",
+                options: [
+                    "A. Kalimat 1 Simile; Kalimat 2 Metafora",
+                    "B. Kalimat 1 Metafora; Kalimat 2 Personifikasi",
+                    "C. Kalimat 1 Hiperbola; Kalimat 2 Simile",
+                    "D. Kalimat 1 Personifikasi; Kalimat 2 Hiperbola"
+                ],
+                answer: 0,
+                explanation: "Kalimat 1 memakai perbandingan eksplisit 'bak' (Simile), sedangkan Kalimat 2 langsung menyatukan 'senyum madu' sebagai kiasan murni (Metafora)."
+            },
+            {
+                question: "Kalimat puisi: 'Jeritan sunyi memecahkan kesunyian malam.'\nSelain hiperbola, ungkapan ini meminjam sifat manusia pada kondisi alam. Elemen personifikasi terletak pada...",
+                options: [
+                    "A. 'Kesunyian malam'",
+                    "B. 'Jeritan sunyi' yang seolah dapat menjerit",
+                    "C. 'Malam' yang menjadi dingin",
+                    "D. 'Pecah' menjadi kepingan"
+                ],
+                answer: 1,
+                explanation: "'Jeritan' adalah aksi makhluk hidup yang dilekatkan pada konsep abstrak 'sunyi'."
+            },
+            {
+                question: "Dalam mengidentifikasi majas puisi, langkah pertama yang wajib dilakukan oleh seorang pujangga/siswa adalah...",
+                options: [
+                    "A. Menghitung jumlah kata dalam bait",
+                    "B. Membaca puisi secara menyeluruh dan menemukan kata-kata bernilai rasa/konotatif",
+                    "C. Langsung mencari kata 'bagaikan' atau 'seperti'",
+                    "D. Membuka kamus istilah sastra kuno"
+                ],
+                answer: 1,
+                explanation: "Langkah awal adalah membaca penghayatan menyeluruh untuk menangkap makna konotasi & perbandingan yang tersirat."
+            }
+        ];
+
+        // State Jawaban Kuis
+        let userAnswers = new Array(10).fill(null);
+        let quizSubmitted = false;
+
+        /* ==========================================================================
+           6. SLIDE RENDERER ENGINE
+           ========================================================================== */
+        const slideCategories = [
+            "SAMPUL DEWAN PENYAIR",
+            "TUJUAN & CAPAIAN PEMBELAJARAN",
+            "HAKIKAT GAYA BAHASA",
+            "4 PILAR MAJAS UTAMA",
+            "BEDAH MAJAS METAFORA",
+            "BEDAH MAJAS PERSONIFIKASI",
+            "BEDAH MAJAS HIPERBOLA",
+            "BEDAH MAJAS SIMILE",
+            "TABEL MATRIKS PEMBEDA",
+            "ANALISIS PUISI INTERAKTIF",
+            "5 LANGKAH IDENTIFIKASI",
+            "UJIAN KELAYAKAN KSATRIA",
+            "REKAP NILAI & SERTIFIKAT",
+            "RANGKUMAN & DAFTAR PUSTAKA"
+        ];
+
+        function initSlideSelect() {
+            const select = document.getElementById('slide-select');
+            select.innerHTML = '';
+            for (let i = 1; i <= totalSlides; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = `Babak ${i}: ${slideCategories[i-1]}`;
+                select.appendChild(opt);
+            }
         }
 
-        function renderSlide(index) {
-            const slide = slidesData[index];
-            const contentContainer = document.getElementById('slideContent');
+        function updateNavigationUI() {
+            document.getElementById('current-slide-num').innerText = currentSlide;
+            document.getElementById('slide-category').innerText = slideCategories[currentSlide - 1];
+            document.getElementById('slide-select').value = currentSlide;
 
-            contentContainer.classList.remove('slide-content');
-            void contentContainer.offsetWidth; // Force reflow
-            contentContainer.classList.add('slide-content');
+            document.getElementById('prev-btn').disabled = (currentSlide === 1);
+            const nextBtn = document.getElementById('next-btn');
+            if (currentSlide === totalSlides) {
+                nextBtn.innerHTML = `<span>Selesai & Rangkuman</span> <i class="fa-solid fa-flag-checkered"></i>`;
+            } else {
+                nextBtn.innerHTML = `<span>Selanjutnya</span> <i class="fa-solid fa-chevron-right"></i>`;
+            }
+        }
 
-            contentContainer.innerHTML = slide.content;
+        function renderSlideContent() {
+            const container = document.getElementById('slide-content-container');
+            playQuillSFX();
 
-            document.getElementById('currentSlideNum').textContent = index + 1;
-            document.getElementById('slideDropdown').value = index;
-            document.getElementById('slideDropdownMobile').value = index;
+            switch(currentSlide) {
+                case 1:
+                    container.innerHTML = `
+                        <div class="text-center space-y-4 my-auto py-4">
+                            <div class="inline-block border-2 border-gold-500 rounded-full p-3 bg-stone-900/60 mb-2">
+                                <i class="fa-solid fa-feather-pointed text-4xl sm:text-5xl text-gold-400"></i>
+                            </div>
+                            <h2 class="font-cinzel text-xl sm:text-3xl md:text-4xl text-crimson-800 font-extrabold tracking-wider leading-tight">
+                                MENGENALI MAJAS DALAM PUISI
+                            </h2>
+                            <p class="font-medieval text-base sm:text-xl text-amber-900 font-semibold italic">
+                                "Petualangan Menemukan Keindahan Bahasa dalam Puisi"
+                            </p>
+                            <div class="w-32 h-1 bg-gradient-to-r from-transparent via-gold-600 to-transparent mx-auto my-3"></div>
 
-            const progress = ((index + 1) / slidesData.length) * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
+                            <!-- Dewan Ksatria Penyair / Anggota Kelompok -->
+                            <div class="mt-6 bg-amber-950/10 border border-amber-800/40 rounded-lg p-4 max-w-2xl mx-auto shadow-inner">
+                                <h3 class="font-cinzel text-sm sm:text-base text-crimson-900 font-bold mb-3 tracking-widest uppercase">
+                                    📜 DEWAN KSATRIA PENYAIR (KELOMPOK) 📜
+                                </h3>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left font-medieval text-xs sm:text-sm text-amber-950">
+                                    <div class="bg-amber-100/60 p-2 rounded border border-amber-900/20 flex items-center space-x-2">
+                                        <i class="fa-solid fa-user-shield text-crimson-700"></i>
+                                        <span><strong>Agung Pangestu</strong> (2510631080114)</span>
+                                    </div>
+                                    <div class="bg-amber-100/60 p-2 rounded border border-amber-900/20 flex items-center space-x-2">
+                                        <i class="fa-solid fa-user-shield text-crimson-700"></i>
+                                        <span><strong>Ariska Nurhidayah</strong> (2510631080019)</span>
+                                    </div>
+                                    <div class="bg-amber-100/60 p-2 rounded border border-amber-900/20 flex items-center space-x-2">
+                                        <i class="fa-solid fa-user-shield text-crimson-700"></i>
+                                        <span><strong>Siti Robiah Adawiyah</strong> (2510631080148)</span>
+                                    </div>
+                                    <div class="bg-amber-100/60 p-2 rounded border border-amber-900/20 flex items-center space-x-2">
+                                        <i class="fa-solid fa-user-shield text-crimson-700"></i>
+                                        <span><strong>Siti Masadah</strong> (2510631080146)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
 
-            document.getElementById('prevBtn').disabled = (index === 0);
-            document.getElementById('nextBtn').disabled = (index === slidesData.length - 1);
+                case 2:
+                    container.innerHTML = `
+                        <div class="space-y-4">
+                            <h2 class="font-cinzel text-lg sm:text-2xl text-crimson-800 font-bold border-b-2 border-amber-900/30 pb-2">
+                                🛡️ TUJUAN & CAPAIAN PEMBELAJARAN (CP/TP)
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-cormorant text-sm sm:text-base">
+                                <div class="bg-amber-100/70 p-4 rounded-lg border-l-4 border-crimson-700 shadow-sm">
+                                    <h3 class="font-cinzel text-sm font-bold text-crimson-900 mb-2 flex items-center">
+                                        <i class="fa-solid fa-scroll mr-2 text-gold-600"></i> Capaian Pembelajaran (CP)
+                                    </h3>
+                                    <p class="text-amber-950 leading-relaxed italic">
+                                        "Peserta didik mampu menganalisis, mengevaluasi, dan mengapresiasi gagasan serta pandangan dalam teks puisi, khususnya mengidentifikasi keindahan gaya bahasa (majas) secara kritis dan estetik."
+                                    </p>
+                                </div>
+                                <div class="bg-amber-100/70 p-4 rounded-lg border-l-4 border-gold-600 shadow-sm">
+                                    <h3 class="font-cinzel text-sm font-bold text-crimson-900 mb-2 flex items-center">
+                                        <i class="fa-solid fa-bullseye mr-2 text-crimson-700"></i> Tujuan Pembelajaran (TP)
+                                    </h3>
+                                    <ul class="list-disc list-inside space-y-1.5 text-amber-950">
+                                        <li>Menganalisis 4 jenis majas utama (Metafora, Personifikasi, Hiperbola, Simile) dalam puisi.</li>
+                                        <li>Membedakan karakteristik tiap majas melalui fitur kebahasaan spesifik.</li>
+                                        <li>Menginterpretasi makna konotatif dalam bait puisi SMA Kelas XI.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
 
-            if (index === 11) {
-                renderQuizQuestion();
+                case 3:
+                    container.innerHTML = `
+                        <div class="space-y-4">
+                            <h2 class="font-cinzel text-lg sm:text-2xl text-crimson-800 font-bold border-b-2 border-amber-900/30 pb-2">
+                                📖 HAKIKAT GAYA BAHASA (MAJAS)
+                            </h2>
+                            <div class="bg-amber-50/80 p-4 sm:p-5 rounded-lg border border-amber-900/20 space-y-3 font-cormorant text-base sm:text-lg">
+                                <p class="leading-relaxed">
+                                    <strong>Majas</strong> atau gaya bahasa adalah pemanfaatan kekayaan bahasa, pemakaian ragam tertentu untuk memperoleh efek-efek tertentu yang membuat karya sastra puisi menjadi lebih hidup, berjiwa, dan penuh daya pikat estetik.
+                                </p>
+                                <blockquote class="bg-amber-200/50 p-3 border-l-4 border-crimson-800 italic text-amber-950">
+                                    "Gaya bahasa adalah cara mengungkapkan pikiran melalui bahasa secara khas yang memperlihatkan jiwa dan kepribadian penulis." 
+                                    <span class="block text-right font-bold text-xs mt-1 font-medieval">— Gorys Keraf (2009)</span>
+                                </blockquote>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 4:
+                    container.innerHTML = `
+                        <div class="space-y-3">
+                            <h2 class="font-cinzel text-lg sm:text-xl text-crimson-800 font-bold border-b-2 border-amber-900/30 pb-2">
+                                🏰 4 PILAR MAJAS UTAMA (Klik Kartu untuk Membalik!)
+                            </h2>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                ${renderFlipCard('metafora', 'Metafora', 'Kiasan Langsung', 'Membandingkan 2 hal secara langsung tanpa kata tugas.', 'fa-gem')}
+                                ${renderFlipCard('personifikasi', 'Personifikasi', 'Insani Benda', 'Gaya bahasa yang memanusia-kan benda mati.', 'fa-feather')}
+                                ${renderFlipCard('hiperbola', 'Hiperbola', 'Maha Berlebihan', 'Melampaui kenyataan untuk kesan dramatis.', 'fa-volcano')}
+                                ${renderFlipCard('simile', 'Simile', 'Pembanding Baku', 'Membandingkan secara eksplisit (bak/seperti).', 'fa-scale-balanced')}
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 5:
+                    container.innerHTML = `
+                        <div class="space-y-4">
+                            <h2 class="font-cinzel text-lg sm:text-2xl text-crimson-800 font-bold border-b-2 border-amber-900/30 pb-2 flex items-center">
+                                <i class="fa-solid fa-crown text-gold-600 mr-2"></i> BEDAH MAJAS 1: METAFORA
+                            </h2>
+                            <div class="bg-amber-100/80 p-4 rounded-lg border border-amber-900/30 space-y-3 font-cormorant">
+                                <p class="text-base sm:text-lg leading-relaxed">
+                                    <strong>Metafora</strong> memindahkan sifat suatu objek ke objek lain secara langsung berdasarkan analogi atau persamaan makna konotatif murni.
+                                </p>
+                                <div class="bg-amber-200/60 p-3 rounded border border-amber-900/20">
+                                    <span class="font-medieval text-crimson-900 font-bold text-sm block">Contoh Bait Puisi:</span>
+                                    <p class="italic text-base sm:text-lg text-amber-950 mt-1">"Ia adalah <span class="text-crimson-700 font-bold underline">tulang punggung</span> keluarga yang tak kenal lelah."</p>
+                                </div>
+                                <div class="text-xs sm:text-sm text-amber-900 bg-amber-50 p-2.5 rounded">
+                                    💡 <strong>Penjelasan:</strong> Kata <em>'tulang punggung'</em> disamakan langsung dengan peran penopang nafkah tanpa kata pembanding.
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 6:
+                    container.innerHTML = `
+                        <div class="space-y-4">
+                            <h2 class="font-cinzel text-lg sm:text-2xl text-crimson-800 font-bold border-b-2 border-amber-900/30 pb-2 flex items-center">
+                                <i class="fa-solid fa-wind text-gold-600 mr-2"></i> BEDAH MAJAS 2: PERSONIFIKASI
+                            </h2>
+                            <div class="bg-amber-100/80 p-4 rounded-lg border border-amber-900/30 space-y-3 font-cormorant">
+                                <p class="text-base sm:text-lg leading-relaxed">
+                                    <strong>Personifikasi</strong> menganggap benda mati atau hal abstrak seolah-olah memiliki perilaku, perasaan, atau tindakan seperti manusia hidup.
+                                </p>
+                                <div class="bg-amber-200/60 p-3 rounded border border-amber-900/20">
+                                    <span class="font-medieval text-crimson-900 font-bold text-sm block">Contoh Bait Puisi:</span>
+                                    <p class="italic text-base sm:text-lg text-amber-950 mt-1">"Ombak <span class="text-crimson-700 font-bold underline">berkejaran dan berbisik</span> kepada pasir pantai."</p>
+                                </div>
+                                <div class="text-xs sm:text-sm text-amber-900 bg-amber-50 p-2.5 rounded">
+                                    💡 <strong>Penjelasan:</strong> Ombak (benda mati) diberi aksi manusiawi yaitu <em>'berkejaran'</em> dan <em>'berbisik'</em>.
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 7:
+                    container.innerHTML = `
+                        <div class="space-y-4">
+                            <h2 class="font-cinzel text-lg sm:text-2xl text-crimson-800 font-bold border-b-2 border-amber-900/30 pb-2 flex items-center">
+                                <i class="fa-solid fa-fire text-gold-600 mr-2"></i> BEDAH MAJAS 3: HIPERBOLA
+                            </h2>
+                            <div class="bg-amber-100/80 p-4 rounded-lg border border-amber-900/30 space-y-3 font-cormorant">
+                                <p class="text-base sm:text-lg leading-relaxed">
+                                    <strong>Hiperbola</strong> menggunakan kata-kata yang menyatakan sesuatu secara berlebihan, membesarkan jumlah/ukuran demi mendapat efek penekanan emosi.
+                                </p>
+                                <div class="bg-amber-200/60 p-3 rounded border border-amber-900/20">
+                                    <span class="font-medieval text-crimson-900 font-bold text-sm block">Contoh Bait Puisi:</span>
+                                    <p class="italic text-base sm:text-lg text-amber-950 mt-1">"Tangisannya <span class="text-crimson-700 font-bold underline">mengeringkan seluruh lautan</span> di bumi."</p>
+                                </div>
+                                <div class="text-xs sm:text-sm text-amber-900 bg-amber-50 p-2.5 rounded">
+                                    💡 <strong>Penjelasan:</strong> Mengeringkan lautan secara harfiah tidak mungkin, namun digunakan untuk menekankan betapa dalamnya kesedihan.
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 8:
+                    container.innerHTML = `
+                        <div class="space-y-4">
+                            <h2 class="font-cinzel text-lg sm:text-2xl text-crimson-800 font-bold border-b-2 border-amber-900/30 pb-2 flex items-center">
+                                <i class="fa-solid fa-equals text-gold-600 mr-2"></i> BEDAH MAJAS 4: SIMILE
+                            </h2>
+                            <div class="bg-amber-100/80 p-4 rounded-lg border border-amber-900/30 space-y-3 font-cormorant">
+                                <p class="text-base sm:text-lg leading-relaxed">
+                                    <strong>Simile</strong> membandingkan dua hal berlainan secara eksplisit menggunakan kata hubung pembanding (seperti, bak, bagai, laksana, umpama).
+                                </p>
+                                <div class="bg-amber-200/60 p-3 rounded border border-amber-900/20">
+                                    <span class="font-medieval text-crimson-900 font-bold text-sm block">Contoh Bait Puisi:</span>
+                                    <p class="italic text-base sm:text-lg text-amber-950 mt-1">"Wajahnya bersinar <span class="text-crimson-700 font-bold underline">bagaikan</span> bulan purnama."</p>
+                                </div>
+                                <div class="text-xs sm:text-sm text-amber-900 bg-amber-50 p-2.5 rounded">
+                                    💡 <strong>Penjelasan:</strong> Penggunaan kata tugas <em>'bagaikan'</em> menjadi penanda eksplisit majas Simile.
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 9:
+                    container.innerHTML = `
+                        <div class="space-y-3">
+                            <h2 class="font-cinzel text-base sm:text-xl text-crimson-800 font-bold border-b-2 border-amber-900/30 pb-2">
+                                📊 TABEL MATRIKS PERBANDINGAN MAJAS
+                            </h2>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse font-cormorant text-xs sm:text-sm">
+                                    <thead>
+                                        <tr class="bg-amber-900 text-gold-300 font-cinzel">
+                                            <th class="p-2 border border-amber-800">Majas</th>
+                                            <th class="p-2 border border-amber-800">Kata Kunci / Ciri</th>
+                                            <th class="p-2 border border-amber-800">Contoh Ringkas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-amber-50/90 text-amber-950">
+                                        <tr>
+                                            <td class="p-2 border border-amber-900/20 font-bold text-crimson-800">Metafora</td>
+                                            <td class="p-2 border border-amber-900/20">Tanpa kata pembanding (Implisit)</td>
+                                            <td class="p-2 border border-amber-900/20">Raja siang, Kembang desa</td>
+                                        </tr>
+                                        <tr class="bg-amber-100/50">
+                                            <td class="p-2 border border-amber-900/20 font-bold text-crimson-800">Personifikasi</td>
+                                            <td class="p-2 border border-amber-900/20">Benda bertindak seperti manusia</td>
+                                            <td class="p-2 border border-amber-900/20">Pena menari, Angin berbisik</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border border-amber-900/20 font-bold text-crimson-800">Hiperbola</td>
+                                            <td class="p-2 border border-amber-900/20">Sangat berlebihan & dramatis</td>
+                                            <td class="p-2 border border-amber-900/20">Membelah angkasa, Mengguncang dunia</td>
+                                        </tr>
+                                        <tr class="bg-amber-100/50">
+                                            <td class="p-2 border border-amber-900/20 font-bold text-crimson-800">Simile</td>
+                                            <td class="p-2 border border-amber-900/20">Pakai kata: bagai, seperti, bak</td>
+                                            <td class="p-2 border border-amber-900/20">Bak pinang dibelah dua</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 10:
+                    container.innerHTML = `
+                        <div class="space-y-3">
+                            <h2 class="font-cinzel text-base sm:text-xl text-crimson-800 font-bold border-b-2 border-amber-900/30 pb-2">
+                                🔍 ANALISIS PUISI INTERAKTIF (Klik Baris Puisi!)
+                            </h2>
+                            <div class="bg-amber-100/90 p-4 rounded-lg border border-amber-900/30 space-y-2 font-cormorant">
+                                <h3 class="font-medieval text-center text-sm font-bold text-amber-900 mb-2">
+                                    "Rindu di Ujung Senja"
+                                </h3>
+                                
+                                <div onclick="showPoemMajas(1)" class="p-2 bg-amber-50 hover:bg-amber-200/80 rounded cursor-pointer border border-amber-900/20 transition flex justify-between items-center">
+                                    <span class="italic text-sm sm:text-base">1. Sang surya mengedipkan matanya di ufuk barat</span>
+                                    <i class="fa-solid fa-magnifying-glass text-xs text-crimson-700"></i>
+                                </div>
+                                <div onclick="showPoemMajas(2)" class="p-2 bg-amber-50 hover:bg-amber-200/80 rounded cursor-pointer border border-amber-900/20 transition flex justify-between items-center">
+                                    <span class="italic text-sm sm:text-base">2. Hatinya seperti samudra yang tak bertepi</span>
+                                    <i class="fa-solid fa-magnifying-glass text-xs text-crimson-700"></i>
+                                </div>
+                                <div onclick="showPoemMajas(3)" class="p-2 bg-amber-50 hover:bg-amber-200/80 rounded cursor-pointer border border-amber-900/20 transition flex justify-between items-center">
+                                    <span class="italic text-sm sm:text-base">3. Jeritan rindunya memecahkan keheningan malam</span>
+                                    <i class="fa-solid fa-magnifying-glass text-xs text-crimson-700"></i>
+                                </div>
+
+                                <div id="poem-analysis-box" class="mt-3 p-3 bg-amber-900 text-amber-100 rounded text-xs sm:text-sm hidden">
+                                    <!-- Analysis output -->
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 11:
+                    container.innerHTML = `
+                        <div class="space-y-3">
+                            <h2 class="font-cinzel text-base sm:text-xl text-crimson-800 font-bold border-b-2 border-amber-900/30 pb-2">
+                                🧭 5 LANGKAH IDENTIFIKASI MAJAS (Wizard Step)
+                            </h2>
+                            <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 font-cormorant text-xs">
+                                <div class="bg-amber-100 p-2.5 rounded border border-amber-800/30 text-center">
+                                    <div class="w-6 h-6 bg-crimson-700 text-amber-100 rounded-full mx-auto mb-1 flex items-center justify-center font-bold">1</div>
+                                    <p class="font-bold">Baca Puisi Utuh</p>
+                                </div>
+                                <div class="bg-amber-100 p-2.5 rounded border border-amber-800/30 text-center">
+                                    <div class="w-6 h-6 bg-crimson-700 text-amber-100 rounded-full mx-auto mb-1 flex items-center justify-center font-bold">2</div>
+                                    <p class="font-bold">Tandai Kata Kiasan</p>
+                                </div>
+                                <div class="bg-amber-100 p-2.5 rounded border border-amber-800/30 text-center">
+                                    <div class="w-6 h-6 bg-crimson-700 text-amber-100 rounded-full mx-auto mb-1 flex items-center justify-center font-bold">3</div>
+                                    <p class="font-bold">Cek Kata Tugas</p>
+                                </div>
+                                <div class="bg-amber-100 p-2.5 rounded border border-amber-800/30 text-center">
+                                    <div class="w-6 h-6 bg-crimson-700 text-amber-100 rounded-full mx-auto mb-1 flex items-center justify-center font-bold">4</div>
+                                    <p class="font-bold">Analisis Subjek</p>
+                                </div>
+                                <div class="bg-amber-100 p-2.5 rounded border border-amber-800/30 text-center">
+                                    <div class="w-6 h-6 bg-crimson-700 text-amber-100 rounded-full mx-auto mb-1 flex items-center justify-center font-bold">5</div>
+                                    <p class="font-bold">Tentukan Jenis Majas</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 12:
+                    renderQuizSlide(container);
+                    break;
+
+                case 13:
+                    renderScoreSlide(container);
+                    break;
+
+                case 14:
+                    container.innerHTML = `
+                        <div class="space-y-4">
+                            <h2 class="font-cinzel text-lg sm:text-2xl text-crimson-800 font-bold border-b-2 border-amber-900/30 pb-2">
+                                📚 RANGKUMAN & DAFTAR PUSTAKA AKADEMIS
+                            </h2>
+                            <div class="bg-amber-100/90 p-4 rounded-lg border border-amber-900/30 space-y-3 font-cormorant text-xs sm:text-sm">
+                                <div>
+                                    <h3 class="font-medieval text-crimson-900 font-bold">📌 Intisari Rangkuman:</h3>
+                                    <p class="text-amber-950">Majas adalah instrumen utama pujangga untuk menyuntikkan jiwa ke dalam kata-kata. Memahami perbedaan Metafora, Personifikasi, Hiperbola, dan Simile mempertajam apresiasi sastra kita.</p>
+                                </div>
+                                <div>
+                                    <h3 class="font-medieval text-crimson-900 font-bold">📖 Referensi Akademis:</h3>
+                                    <ul class="list-disc list-inside text-amber-900 space-y-1">
+                                        <li>Keraf, Gorys. (2009). <em>Diksi dan Gaya Bahasa</em>. Jakarta: Gramedia Pustaka Utama.</li>
+                                        <li>Tarigan, Henry Guntur. (2013). <em>Pengajaran Gaya Bahasa</em>. Bandung: Angkasa.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+
+        /* Helper Card 3D Flip */
+        function renderFlipCard(id, title, subtitle, desc, icon) {
+            return `
+                <div class="perspective-1000 h-44 cursor-pointer" onclick="toggleCardFlip(this)">
+                    <div class="transform-style-3d relative w-full h-full rounded-lg shadow-md border border-amber-900/30">
+                        <!-- FRONT -->
+                        <div class="flip-card-front absolute inset-0 bg-amber-100/90 p-3 flex flex-col items-center justify-center text-center rounded-lg">
+                            <i class="fa-solid ${icon} text-2xl text-crimson-700 mb-2"></i>
+                            <h3 class="font-cinzel text-sm font-bold text-amber-950">${title}</h3>
+                            <p class="font-medieval text-xs text-amber-800 mt-1">${subtitle}</p>
+                            <span class="text-[10px] text-amber-700/60 mt-3 font-medieval">Klik untuk balik 🔄</span>
+                        </div>
+                        <!-- BACK -->
+                        <div class="flip-card-back absolute inset-0 bg-amber-900 text-amber-100 p-3 flex flex-col items-center justify-center text-center rounded-lg">
+                            <h4 class="font-cinzel text-xs text-gold-400 font-bold mb-1">${title}</h4>
+                            <p class="font-cormorant text-xs leading-tight">${desc}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleCardFlip(cardEl) {
+            playFlipSFX();
+            cardEl.classList.toggle('flipped');
+        }
+
+        function showPoemMajas(num) {
+            playClickSFX();
+            const box = document.getElementById('poem-analysis-box');
+            box.classList.remove('hidden');
+            if (num === 1) {
+                box.innerHTML = `<strong>Baris 1:</strong> <em>"Sang surya mengedipkan matanya..."</em> 👉 <strong>Majas Personifikasi</strong>. Surya (matahari) diberi sifat manusia mengedipkan mata.`;
+            } else if (num === 2) {
+                box.innerHTML = `<strong>Baris 2:</strong> <em>"Hatinya seperti samudra..."</em> 👉 <strong>Majas Simile</strong>. Menggunakan kata pembanding eksplisit 'seperti'.`;
+            } else if (num === 3) {
+                box.innerHTML = `<strong>Baris 3:</strong> <em>"Memecahkan keheningan malam..."</em> 👉 <strong>Majas Hiperbola & Personifikasi</strong>. Menyampaikan efek dramatis kesedihan secara berlebihan.`;
+            }
+        }
+
+        /* ==========================================================================
+           7. FORMULIR IDENTITAS & KUIS INTERAKTIF (SLIDE 12)
+           ========================================================================== */
+        let currentQuizIndex = 0;
+
+        function renderQuizSlide(container) {
+            // Jika siswa belum mengisi identitas, tampilkan Formulir "Gulungan Pendaftaran Ksatria"
+            if (!studentInfo.nama || !studentInfo.kelas || !studentInfo.sekolah) {
+                container.innerHTML = `
+                    <div class="max-w-md mx-auto bg-amber-100/90 p-5 rounded-lg border-2 border-gold-600 shadow-xl space-y-4 font-cormorant">
+                        <div class="text-center space-y-1">
+                            <div class="wax-seal w-12 h-12 rounded-full mx-auto flex items-center justify-center text-gold-300 font-cinzel text-lg shadow-md mb-2">
+                                📜
+                            </div>
+                            <h3 class="font-cinzel text-lg text-crimson-900 font-bold">
+                                GULUNGAN PENDAFTARAN KSATRIA
+                            </h3>
+                            <p class="font-medieval text-xs text-amber-900">
+                                Isi identitasmu sebelum memasuki Ujian Kelayakan Ksatria Bahasa!
+                            </p>
+                        </div>
+
+                        <form onsubmit="handleRegistration(event)" class="space-y-3 text-xs sm:text-sm">
+                            <div>
+                                <label class="block font-medieval text-amber-950 mb-1">Nama Lengkap Siswa:</label>
+                                <input type="text" id="reg-nama" required placeholder="Contoh: Raden Wijaya" class="w-full p-2 bg-amber-50 border border-amber-900/40 rounded font-cormorant text-amber-950 focus:outline-none focus:border-crimson-700">
+                            </div>
+                            <div>
+                                <label class="block font-medieval text-amber-950 mb-1">Kelas:</label>
+                                <input type="text" id="reg-kelas" required placeholder="Contoh: XI-2 Bahasa" class="w-full p-2 bg-amber-50 border border-amber-900/40 rounded font-cormorant text-amber-950 focus:outline-none focus:border-crimson-700">
+                            </div>
+                            <div>
+                                <label class="block font-medieval text-amber-950 mb-1">Asal Sekolah:</label>
+                                <input type="text" id="reg-sekolah" required placeholder="Contoh: SMAN 1 Karawang" class="w-full p-2 bg-amber-50 border border-amber-900/40 rounded font-cormorant text-amber-950 focus:outline-none focus:border-crimson-700">
+                            </div>
+
+                            <button type="submit" class="w-full py-2.5 bg-crimson-700 hover:bg-crimson-800 text-gold-300 border border-gold-500 rounded font-medieval font-bold tracking-wider transition shadow-md">
+                                ⚔️ MULAI UJIAN KUIS (10 SOAL) ⚔️
+                            </button>
+                        </form>
+                    </div>
+                `;
+                return;
+            }
+
+            // Tampilan Soal Kuis
+            const q = quizQuestions[currentQuizIndex];
+            container.innerHTML = `
+                <div class="space-y-4 font-cormorant">
+                    <!-- Progress Bar & Student Badge -->
+                    <div class="flex justify-between items-center text-xs bg-amber-200/60 p-2 rounded border border-amber-900/20">
+                        <span class="font-medieval text-amber-900">
+                            🏰 Ksatria: <strong>${studentInfo.nama}</strong> (${studentInfo.kelas})
+                        </span>
+                        <span class="font-cinzel text-crimson-900 font-bold">
+                            Soal ${currentQuizIndex + 1} dari 10
+                        </span>
+                    </div>
+
+                    <!-- Question Box -->
+                    <div class="bg-amber-100/90 p-4 rounded-lg border border-amber-900/30 shadow-sm space-y-3">
+                        <p class="whitespace-pre-line text-sm sm:text-base font-semibold text-amber-950">
+                            ${q.question}
+                        </p>
+
+                        <!-- Options -->
+                        <div class="space-y-2 mt-3">
+                            ${q.options.map((opt, idx) => {
+                                const isSelected = userAnswers[currentQuizIndex] === idx;
+                                return `
+                                    <button onclick="selectAnswer(${idx})" class="w-full text-left p-2.5 rounded text-xs sm:text-sm border transition flex items-center justify-between ${isSelected ? 'bg-crimson-800 text-gold-200 border-gold-500 font-bold' : 'bg-amber-50 hover:bg-amber-200 text-amber-950 border-amber-900/20'}">
+                                        <span>${opt}</span>
+                                        ${isSelected ? '<i class="fa-solid fa-check-circle text-gold-400"></i>' : ''}
+                                    </button>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Quiz Question Navigation -->
+                    <div class="flex justify-between items-center pt-2">
+                        <button onclick="prevQuestion()" ${currentQuizIndex === 0 ? 'disabled' : ''} class="px-3 py-1 bg-stone-800 text-amber-200 text-xs rounded font-medieval disabled:opacity-40">
+                            ← Soal Lalu
+                        </button>
+
+                        <div class="flex space-x-1">
+                            ${quizQuestions.map((_, i) => `
+                                <button onclick="jumpToQuestion(${i})" class="w-6 h-6 text-[10px] rounded font-bold ${userAnswers[i] !== null ? 'bg-crimson-700 text-amber-100' : 'bg-amber-200 text-amber-900'} ${currentQuizIndex === i ? 'ring-2 ring-gold-500' : ''}">
+                                    ${i + 1}
+                                </button>
+                            `).join('')}
+                        </div>
+
+                        ${currentQuizIndex === 9 ? `
+                            <button onclick="submitQuiz()" class="px-3 py-1 bg-gold-600 hover:bg-gold-500 text-amber-950 text-xs rounded font-medieval font-bold border border-amber-900">
+                                Kirim Nilai 📜
+                            </button>
+                        ` : `
+                            <button onclick="nextQuestion()" class="px-3 py-1 bg-crimson-700 text-amber-100 text-xs rounded font-medieval">
+                                Soal Lanjut →
+                            </button>
+                        `}
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleRegistration(e) {
+            e.preventDefault();
+            playClickSFX();
+            studentInfo.nama = document.getElementById('reg-nama').value.trim();
+            studentInfo.kelas = document.getElementById('reg-kelas').value.trim();
+            studentInfo.sekolah = document.getElementById('reg-sekolah').value.trim();
+            renderSlideContent();
+        }
+
+        function selectAnswer(optIdx) {
+            playClickSFX();
+            userAnswers[currentQuizIndex] = optIdx;
+            renderSlideContent();
+        }
+
+        function nextQuestion() {
+            if (currentQuizIndex < 9) {
+                currentQuizIndex++;
+                renderSlideContent();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuizIndex > 0) {
+                currentQuizIndex--;
+                renderSlideContent();
+            }
+        }
+
+        function jumpToQuestion(idx) {
+            currentQuizIndex = idx;
+            renderSlideContent();
+        }
+
+        function submitQuiz() {
+            playClickSFX();
+            // Check if all answered
+            const unanswered = userAnswers.filter(a => a === null).length;
+            if (unanswered > 0) {
+                if (!confirm(`Masih ada ${unanswered} soal yang belum dijawab. Yakin ingin menyelesaikan sekarang?`)) {
+                    return;
+                }
+            }
+            quizSubmitted = true;
+            goToSlide(13);
+        }
+
+        /* ==========================================================================
+           8. REKAP NILAI & INTEGRASI GOOGLE APPS SCRIPT (SLIDE 13)
+           ========================================================================== */
+        let postAttempted = false;
+        let postSuccess = false;
+
+        function calculateScore() {
+            let correct = 0;
+            userAnswers.forEach((ans, idx) => {
+                if (ans === quizQuestions[idx].answer) {
+                    correct++;
+                }
+            });
+            const score = correct * 10;
+            
+            let gelar = "Prajurit Magang";
+            if (score >= 90) {
+                gelar = "Master Pujangga Istana 👑";
+            } else if (score >= 70) {
+                gelar = "Ksatria Bahasa Utama ⚔️";
+            }
+
+            return { correct, score, gelar };
+        }
+
+        function renderScoreSlide(container) {
+            const { correct, score, gelar } = calculateScore();
+
+            // Jalankan Pengiriman Data ke Google Apps Script (Hanya Sekali)
+            if (!postAttempted && studentInfo.nama) {
+                sendDataToGoogleSheets(score, gelar);
+            }
+
+            if (score >= 70) {
+                playCorrectSFX();
+            } else {
+                playWrongSFX();
+            }
+
+            container.innerHTML = `
+                <div class="space-y-4 font-cormorant text-center py-2">
+                    <div class="wax-seal w-16 h-16 rounded-full mx-auto flex items-center justify-center text-gold-300 font-cinzel text-2xl shadow-xl">
+                        🏆
+                    </div>
+
+                    <h2 class="font-cinzel text-xl sm:text-2xl text-crimson-900 font-bold">
+                        PIAGAM HASIL UJIAN KSATRIA BAHASA
+                    </h2>
+
+                    <!-- Parchment Certificate Box -->
+                    <div class="bg-amber-100/90 p-4 sm:p-6 rounded-lg border-2 border-gold-600 shadow-md max-w-lg mx-auto space-y-3">
+                        <p class="font-medieval text-xs text-amber-900 uppercase tracking-widest">Diberikan Kepada:</p>
+                        <h3 class="font-cinzel text-lg sm:text-xl font-bold text-amber-950">${studentInfo.nama || 'Pujangga Tanpa Nama'}</h3>
+                        <p class="font-medieval text-xs text-amber-900">${studentInfo.kelas || '-'} | ${studentInfo.sekolah || '-'}</p>
+
+                        <div class="w-full h-px bg-amber-900/20 my-2"></div>
+
+                        <div class="flex justify-around items-center my-3">
+                            <div>
+                                <span class="text-xs font-medieval text-amber-800 block">Skor Kuis:</span>
+                                <span class="font-cinzel text-2xl sm:text-3xl font-extrabold text-crimson-800">${score}/100</span>
+                            </div>
+                            <div>
+                                <span class="text-xs font-medieval text-amber-800 block">Jawaban Benar:</span>
+                                <span class="font-cinzel text-2xl sm:text-3xl font-extrabold text-amber-900">${correct}/10</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-amber-200/70 p-2 rounded border border-gold-600/50">
+                            <span class="text-xs font-medieval text-amber-900 block">Gelar Kehormatan Medieval:</span>
+                            <span class="font-cinzel text-sm sm:text-base font-bold text-crimson-900">${gelar}</span>
+                        </div>
+                    </div>
+
+                    <!-- Status Pengiriman Google Apps Script Badge -->
+                    <div id="gas-status-badge" class="max-w-lg mx-auto p-3 rounded-lg text-xs font-medieval flex items-center justify-center space-x-2 bg-amber-200 text-amber-950 border border-amber-900/30">
+                        <i class="fa-solid fa-spinner fa-spin text-crimson-700"></i>
+                        <span>Mengirim Data Nilai ke Google Sheet Rekap Kerajaan...</span>
+                    </div>
+
+                    <!-- Tombol Ulangi -->
+                    <button onclick="resetQuiz()" class="px-4 py-2 bg-stone-800 hover:bg-amber-900 text-amber-200 text-xs rounded font-medieval border border-gold-600">
+                        🔄 Ulangi Kuis Ksatria
+                    </button>
+                </div>
+            `;
+        }
+
+        function sendDataToGoogleSheets(score, gelar) {
+            postAttempted = true;
+            const payload = {
+                nama: studentInfo.nama,
+                kelas: studentInfo.kelas,
+                sekolah: studentInfo.sekolah,
+                skor: score,
+                totalSoal: 10,
+                gelar: gelar
+            };
+
+            fetch(GOOGLE_APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Penting untuk bypass CORS Google Apps Script
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                postSuccess = true;
+                const badge = document.getElementById('gas-status-badge');
+                if (badge) {
+                    badge.className = "max-w-lg mx-auto p-3 rounded-lg text-xs font-medieval flex items-center justify-center space-x-2 bg-emerald-100 text-emerald-900 border border-emerald-600 shadow-sm";
+                    badge.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 text-base"></i> <span>📜 Data Nilai Ksatria Berhasil Terkirim ke Rekap Kerajaan!</span>`;
+                }
+            })
+            .catch(err => {
+                const badge = document.getElementById('gas-status-badge');
+                if (badge) {
+                    badge.className = "max-w-lg mx-auto p-3 rounded-lg text-xs font-medieval flex items-center justify-center space-x-2 bg-amber-100 text-amber-950 border border-amber-600";
+                    badge.innerHTML = `<i class="fa-solid fa-paper-plane text-crimson-700"></i> <span>Laporan Nilai Siap di Lembar Kerajaan.</span>`;
+                }
+            });
+        }
+
+        function resetQuiz() {
+            playClickSFX();
+            userAnswers = new Array(10).fill(null);
+            currentQuizIndex = 0;
+            quizSubmitted = false;
+            postAttempted = false;
+            goToSlide(12);
+        }
+
+        /* ==========================================================================
+           9. NAVIGATION ENGINE
+           ========================================================================== */
+        function goToSlide(slideNum) {
+            if (slideNum >= 1 && slideNum <= totalSlides) {
+                currentSlide = slideNum;
+                updateNavigationUI();
+                renderSlideContent();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
         function nextSlide() {
-            if (currentSlide < slidesData.length - 1) {
-                playSoundEffect('click');
-                currentSlide++;
-                renderSlide(currentSlide);
+            if (currentSlide < totalSlides) {
+                goToSlide(currentSlide + 1);
             }
         }
 
         function prevSlide() {
-            if (currentSlide > 0) {
-                playSoundEffect('click');
-                currentSlide--;
-                renderSlide(currentSlide);
+            if (currentSlide > 1) {
+                goToSlide(currentSlide - 1);
             }
         }
 
-        function jumpToSlide(index) {
-            playSoundEffect('click');
-            currentSlide = parseInt(index);
-            renderSlide(currentSlide);
-        }
-
-        // ==========================================
-        // 5. INTERACTIVE COMPONENT HANDLERS
-        // ==========================================
-        function flipCard(cardEl) {
-            playSoundEffect('flip');
-            cardEl.classList.toggle('flipped');
-        }
-
-        function showPoemAnalysis(lineNumber) {
-            playSoundEffect('click');
-            const display = document.getElementById('poemAnalysisDisplay');
-            
-            const analyses = {
-                1: {
-                    line: "Sang surya pamit melempar senyum",
-                    majas: "PERSONIFIKASI",
-                    exp: "Matahari ('sang surya') diberi perilaku manusiawi yaitu 'pamit' dan 'melempar senyum'."
-                },
-                2: {
-                    line: "Ayah adalah nakhoda dalam badai",
-                    majas: "METAFORA",
-                    exp: "Perbandingan langsung antara sosok Ayah dengan 'nakhoda badai' tanpa kata tugas pembanding."
-                },
-                3: {
-                    line: "Air mata ini mengalir sejuta muara",
-                    majas: "HIPERBOLA",
-                    exp: "Pengungkapan rasa sedih yang sangat berlebihan ('sejuta muara') secara dramatis."
-                },
-                4: {
-                    line: "Hati ini hampa bagai padang pasir",
-                    majas: "SIMILE",
-                    exp: "Perbandingan kehampaan hati dengan padang pasir menggunakan kata tugas pembanding 'bagai'."
-                }
-            };
-
-            const data = analyses[lineNumber];
-            display.innerHTML = `
-                <div class="space-y-1.5">
-                    <span class="wax-seal px-2.5 py-0.5 text-xs font-cinzel">Baris ${lineNumber}</span>
-                    <blockquote class="font-garamond italic font-bold text-amber-950 text-base sm:text-lg border-b border-amber-900/30 pb-1">
-                        "${data.line}"
-                    </blockquote>
-                    <div class="bg-amber-950 text-medievalGold font-cinzel font-bold text-xs sm:text-sm py-1 rounded border border-medievalGold shadow">
-                        ✨ MAJAS ${data.majas}
-                    </div>
-                    <p class="text-xs text-amber-950 font-garamond pt-1">
-                        💡 <strong>Bedah Analisis:</strong> ${data.exp}
-                    </p>
-                </div>
-            `;
-        }
-
-        // ==========================================
-        // 6. KUIS INTERAKTIF LOGIC
-        // ==========================================
-        function renderQuizQuestion() {
-            if (quizCurrentIndex >= quizQuestions.length) {
-                renderQuizResults();
-                return;
-            }
-
-            const qData = quizQuestions[quizCurrentIndex];
-            document.getElementById('quizQuestionNum').textContent = quizCurrentIndex + 1;
-            document.getElementById('quizQuestionText').textContent = qData.q;
-            document.getElementById('quizScoreText').textContent = quizScore;
-
-            const optionsContainer = document.getElementById('quizOptions');
-            const feedbackBox = document.getElementById('quizFeedback');
-            feedbackBox.className = "hidden p-2.5 rounded-lg text-xs font-garamond border transition-all";
-
-            let optionsHtml = '';
-            qData.options.forEach((opt, i) => {
-                const isSelected = (quizAnswered[quizCurrentIndex] === i);
-                let btnClass = "bg-parchmentCard text-amber-950 border-amber-900/40 hover:border-medievalGold hover:bg-amber-100";
-                
-                if (quizAnswered[quizCurrentIndex] !== null) {
-                    if (i === qData.answer) {
-                        btnClass = "bg-emerald-800 text-white border-emerald-400 font-bold";
-                    } else if (isSelected) {
-                        btnClass = "bg-red-900 text-white border-red-400 font-bold";
-                    } else {
-                        btnClass = "bg-amber-100/40 text-amber-900/50 opacity-60 border-transparent";
-                    }
-                }
-
-                optionsHtml += `
-                    <button onclick="submitAnswer(${i})" ${quizAnswered[quizCurrentIndex] !== null ? 'disabled' : ''} 
-                            class="p-2.5 text-left font-cinzel text-xs sm:text-sm border-2 rounded-lg transition-all shadow-sm ${btnClass} flex items-center gap-2">
-                        <span class="w-5 h-5 rounded-full border border-amber-900/50 flex items-center justify-center text-[10px] font-bold shrink-0">
-                            ${String.fromCharCode(65 + i)}
-                        </span>
-                        <span>${opt}</span>
-                    </button>
-                `;
-            });
-
-            optionsContainer.innerHTML = optionsHtml;
-
-            if (quizAnswered[quizCurrentIndex] !== null) {
-                const isCorrect = (quizAnswered[quizCurrentIndex] === qData.answer);
-                feedbackBox.classList.remove('hidden');
-                if (isCorrect) {
-                    feedbackBox.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-950');
-                    feedbackBox.innerHTML = `<strong>✅ Benar!</strong> ${qData.exp}`;
-                } else {
-                    feedbackBox.classList.add('bg-red-100', 'border-red-500', 'text-red-950');
-                    feedbackBox.innerHTML = `<strong>❌ Kurang Tepat!</strong> Jawaban yang benar adalah <strong>${qData.options[qData.answer]}</strong>. ${qData.exp}`;
-                }
-
-                feedbackBox.innerHTML += `
-                    <div class="mt-2 text-right">
-                        <button onclick="nextQuizQuestion()" class="px-3 py-1 bg-amber-950 text-medievalGold border border-medievalGold rounded font-cinzel text-xs font-bold hover:brightness-125">
-                            ${quizCurrentIndex < quizQuestions.length - 1 ? 'Soal Berikutnya ►' : 'Lihat Gelar Pujangga 🏆'}
-                        </button>
-                    </div>
-                `;
-            }
-        }
-
-        function submitAnswer(chosenIdx) {
-            if (quizAnswered[quizCurrentIndex] !== null) return;
-
-            quizAnswered[quizCurrentIndex] = chosenIdx;
-            const qData = quizQuestions[quizCurrentIndex];
-
-            if (chosenIdx === qData.answer) {
-                playSoundEffect('correct');
-                quizScore += 10;
-            } else {
-                playSoundEffect('wrong');
-            }
-
-            renderQuizQuestion();
-        }
-
-        function nextQuizQuestion() {
-            playSoundEffect('click');
-            quizCurrentIndex++;
-            renderQuizQuestion();
-        }
-
-        function renderQuizResults() {
-            const container = document.getElementById('quizContainer');
-            
-            let titleAward = "";
-            let badgeIcon = "";
-            let descAward = "";
-
-            if (quizScore >= 80) {
-                titleAward = "Master Pujangga Istana";
-                badgeIcon = "👑";
-                descAward = "Selamat! Penguasaan gaya bahasamu sekelas Pujangga Agung Kerajaan. Keindahan puisi tunduk di bawah penamu!";
-            } else if (quizScore >= 60) {
-                titleAward = "Ksatria Bahasa Utama";
-                badgeIcon = "⚔️";
-                descAward = "Hebat! Kamu memiliki kejelian yang tangguh dalam mengidentifikasi kiasan majas dalam puisi.";
-            } else {
-                titleAward = "Prajurit Magang";
-                badgeIcon = "🛡️";
-                descAward = "Teruslah berlatih membaca naskah puisi! Pelajari kembali materi slide awal untuk mengasah pemahamanmu.";
-            }
-
-            container.innerHTML = `
-                <div class="text-center space-y-3 py-1 font-garamond">
-                    <div class="wax-seal w-14 h-14 text-2xl mx-auto font-medieval">${badgeIcon}</div>
-                    <h3 class="font-cinzel text-lg sm:text-2xl font-bold text-amber-950">
-                        PENYERAHAN GELAR KEHORMATAN
-                    </h3>
-                    
-                    <div class="bg-gradient-to-b from-[#2b0f14] to-[#1a080a] text-parchment p-4 sm:p-5 rounded-xl border-2 border-medievalGold shadow-2xl max-w-lg mx-auto space-y-2.5">
-                        <span class="text-[10px] sm:text-xs font-cinzel text-medievalGold tracking-widest uppercase">Gelar Kehormatan Anda:</span>
-                        <h2 class="font-cinzel text-xl sm:text-3xl font-black text-amber-300 border-b border-amber-800 pb-2">
-                            ${titleAward}
-                        </h2>
-                        <div class="text-2xl sm:text-3xl font-cinzel font-bold text-medievalGold">
-                            SKOR AKHIR: ${quizScore} / 100
-                        </div>
-                        <p class="text-xs sm:text-sm text-amber-100/90 italic">
-                            "${descAward}"
-                        </p>
-                    </div>
-
-                    <button onclick="resetQuiz()" class="px-4 py-2 bg-amber-950 text-medievalGold border-2 border-medievalGold rounded-lg font-cinzel text-xs font-bold hover:bg-amber-900 transition-all shadow-md">
-                        🔄 Ulangi Ujian Kuis
-                    </button>
-                </div>
-            `;
-        }
-
-        function resetQuiz() {
-            playSoundEffect('click');
-            quizCurrentIndex = 0;
-            quizScore = 0;
-            quizAnswered = new Array(quizQuestions.length).fill(null);
-            renderSlide(11);
-        }
-
-        // ==========================================
-        // 7. TOUCH SWIPE & KEYBOARD LISTENERS
-        // ==========================================
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        document.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, { passive: true });
-
-        function handleSwipe() {
-            const threshold = 50;
-            if (touchEndX < touchStartX - threshold) {
-                nextSlide();
-            } else if (touchEndX > touchStartX + threshold) {
-                prevSlide();
-            }
-        }
-
-        document.addEventListener('keydown', e => {
+        /* Keyboard Arrow Key Navigation */
+        document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
         });
 
-        // ==========================================
-        // 8. CANVAS PARTICLES (GOLD EMBERS)
-        // ==========================================
-        function initParticleCanvas() {
-            const canvas = document.getElementById('particleCanvas');
-            const ctx = canvas.getContext('2d');
-            let width = canvas.width = window.innerWidth;
-            let height = canvas.height = window.innerHeight;
-
-            window.addEventListener('resize', () => {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-            });
-
-            const particles = [];
-            const particleCount = 40;
-
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    radius: Math.random() * 2.5 + 0.5,
-                    alpha: Math.random() * 0.6 + 0.2,
-                    speedY: Math.random() * 0.5 + 0.1,
-                    speedX: (Math.random() - 0.5) * 0.3
-                });
-            }
-
-            function animateParticles() {
-                ctx.clearRect(0, 0, width, height);
-
-                particles.forEach(p => {
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255, 215, 0, ${p.alpha})`;
-                    ctx.shadowBlur = 8;
-                    ctx.shadowColor = '#ffd700';
-                    ctx.fill();
-
-                    p.y -= p.speedY;
-                    p.x += p.speedX;
-
-                    if (p.y < 0) {
-                        p.y = height + 10;
-                        p.x = Math.random() * width;
-                    }
-                });
-
-                requestAnimationFrame(animateParticles);
-            }
-
-            animateParticles();
-        }
-
-        // Initialize application when DOM is ready
-        window.onload = initApp;
+        /* ==========================================================================
+           10. INITIALIZATION ON WINDOW LOAD
+           ========================================================================== */
+        window.onload = function() {
+            initSlideSelect();
+            updateNavigationUI();
+            renderSlideContent();
+        };
     </script>
 </body>
 </html>
